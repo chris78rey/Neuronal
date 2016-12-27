@@ -1,16 +1,47 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-                template="./plantilla/plantillabootstrap.xhtml">
+                template="./plantilla/plantillabootstrap.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
 
     <ui:define name="head_top">
-        head_top
+
     </ui:define>
 
     <ui:define name="head_botton">
-        head_botton
+        <link href="resources/verde.css" rel="stylesheet"></link>
+
+    </ui:define>
+    <ui:define name="body">
+
+        <f:view>
+
+
+            <h:form>
+                <h1><h:outputText value="Create/Edit"/></h1>
+                <p:panelGrid columns="2">
+                    <p:outputLabel value="Nombre:" for="nombre" />
+                    <p:inputText id="nombre" value="#{mbeanprueba.t00101usuarios.nombre}" title="Nombre" />
+                    <p:outputLabel value="Apellido:" for="apellido" />
+                    <p:inputText id="apellido" value="#{mbeanprueba.t00101usuarios.apellido}" title="Apellido" />
+                    <p:outputLabel value="Email:" for="email" />
+                    <p:inputText id="email" value="#{mbeanprueba.t00101usuarios.email}" title="Email" />
+                    <p:outputLabel value="Celular:" for="celular" />
+                    <p:inputText id="celular" value="#{mbeanprueba.t00101usuarios.celular}" title="Celular" />
+                    <p:outputLabel value="Direccion:" for="direccion" />
+                    <p:inputText id="direccion" value="#{mbeanprueba.t00101usuarios.direccion}" title="Direccion" />
+                    <p:outputLabel value="Clave:" for="clave" />
+                    <p:inputText id="clave" value="#{mbeanprueba.t00101usuarios.clave}" title="Clave" />
+                    <p:outputLabel value="FechaCreacion:" for="fechaCreacion" />
+                    <p:calendar id="fechaCreacion" mode="inline" value="#{mbeanprueba.t00101usuarios.fechaCreacion}" title="FechaCreacion" />
+                </p:panelGrid>
+                <p:commandButton icon="bt1" update="@form"  actionListener="#{mbeanprueba.buttonAction(actionEvent)}" value="agregar"/>
+            </h:form>
+        </f:view>
+
     </ui:define>
 
-   
 
 </ui:composition>

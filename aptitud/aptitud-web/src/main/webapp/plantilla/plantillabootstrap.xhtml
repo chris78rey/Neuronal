@@ -9,22 +9,23 @@
 
     <h:head>
         <ui:insert name="head_top"></ui:insert>
-        
-        
+
+
         <meta charset="UTF-8"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />		
-        <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet"></link>
-        <link href="../resources/verde.css" rel="stylesheet" type="text/css"></link>
-   
-        
+
+       
+
+        <h:outputStylesheet name="bootstrap/css/bootstrap.css"  />
+
         <ui:insert name="head_botton"></ui:insert>
         <title>Welcome</title>
     </h:head>
     <h:body>
         <ui:insert name="body">
-           
+            <p:clock/>
             <nav class="navbar navbar-inverse">
                 <div class="container-fluid">
                     <div class="navbar-header">
@@ -126,7 +127,9 @@
             </form>
 
         </ui:insert>
+        <!--
         <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+        -->
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
     </h:body>

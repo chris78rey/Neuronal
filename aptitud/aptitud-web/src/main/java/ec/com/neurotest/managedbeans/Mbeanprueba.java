@@ -12,6 +12,8 @@ import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import java.io.Serializable;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.faces.event.ActionEvent;
 
@@ -26,10 +28,26 @@ public class Mbeanprueba implements Serializable {
     private T00101usuarios t00101usuarios = new T00101usuarios();
 
     private static final long serialVersionUID = -6409991910683707991L;
+    private static final Logger LOG = Logger.getLogger(Mbeanprueba.class.getName());
 
     public void buttonAction(ActionEvent actionEvent) {
-        t00101usuariosFacade.create(t00101usuarios);
-        t00101usuarios = new T00101usuarios();
+        try {
+
+            t00101usuarios.setApellido(t00101usuarios.getApellido().toUpperCase());
+            t00101usuarios.setNombre(t00101usuarios.getNombre().toUpperCase());
+            t00101usuarios.setDireccion(t00101usuarios.getDireccion().toUpperCase());
+            t00101usuariosFacade.create(getT00101usuarios());
+            LOG.log(Level.INFO, "se grabo");
+            setT00101usuarios(new T00101usuarios());
+        } catch (Exception exception) {
+            LOG.log(Level.INFO, "No se grabo");
+
+        }
+
+    }
+
+    public void buttonAction2(ActionEvent actionEvent) {
+        setT00101usuarios(new T00101usuarios());
     }
 
     public List<T00101usuarios> getTfindAll() {
