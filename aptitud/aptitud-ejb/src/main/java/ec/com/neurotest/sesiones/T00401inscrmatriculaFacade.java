@@ -5,7 +5,7 @@
  */
 package ec.com.neurotest.sesiones;
 
-import ec.com.neurotest.entidades.T002ClasificadorTest;
+import ec.com.neurotest.entidades.T00401inscrmatricula;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,7 +15,7 @@ import javax.persistence.PersistenceContext;
  * @author crrb
  */
 @Stateless
-public class T002ClasificadorTestFacade extends AbstractFacade<T002ClasificadorTest> implements T002ClasificadorTestFacadeLocal {
+public class T00401inscrmatriculaFacade extends AbstractFacade<T00401inscrmatricula> implements T00401inscrmatriculaFacadeLocal {
 
     @PersistenceContext(unitName = "Punit")
     private EntityManager em;
@@ -25,8 +25,8 @@ public class T002ClasificadorTestFacade extends AbstractFacade<T002ClasificadorT
         return em;
     }
 
-    public T002ClasificadorTestFacade() {
-        super(T002ClasificadorTest.class);
+    public T00401inscrmatriculaFacade() {
+        super(T00401inscrmatricula.class);
     }
-    
+
 }

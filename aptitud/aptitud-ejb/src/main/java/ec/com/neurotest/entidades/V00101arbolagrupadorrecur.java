@@ -28,7 +28,8 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "V00101arbolagrupadorrecur.findAll", query = "SELECT v FROM V00101arbolagrupadorrecur v")})
 public class V00101arbolagrupadorrecur implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = -8615173894868093970L;
+
     @Column(name = "ID_RECURSIVO_TEST")
     private BigInteger idRecursivoTest;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation

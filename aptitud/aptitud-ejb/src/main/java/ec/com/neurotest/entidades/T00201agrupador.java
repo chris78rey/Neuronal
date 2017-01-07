@@ -8,15 +8,12 @@ package ec.com.neurotest.entidades;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -31,7 +28,8 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "T00201agrupador.findAll", query = "SELECT t FROM T00201agrupador t")})
 public class T00201agrupador implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 2111398140578222879L;
+
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     @Basic(optional = false)
@@ -43,8 +41,6 @@ public class T00201agrupador implements Serializable {
     private String descripcionClasificador;
     @Column(name = "ID_RECURSIVO_TEST")
     private BigInteger idRecursivoTest;
-    @OneToMany(mappedBy = "t00201agrupador", fetch = FetchType.LAZY)
-    private Collection<T00203agrupaPreguntas> t00203agrupaPreguntasCollection;
 
     public T00201agrupador() {
     }
@@ -75,14 +71,6 @@ public class T00201agrupador implements Serializable {
 
     public void setIdRecursivoTest(BigInteger idRecursivoTest) {
         this.idRecursivoTest = idRecursivoTest;
-    }
-
-    public Collection<T00203agrupaPreguntas> getT00203agrupaPreguntasCollection() {
-        return t00203agrupaPreguntasCollection;
-    }
-
-    public void setT00203agrupaPreguntasCollection(Collection<T00203agrupaPreguntas> t00203agrupaPreguntasCollection) {
-        this.t00203agrupaPreguntasCollection = t00203agrupaPreguntasCollection;
     }
 
     @Override

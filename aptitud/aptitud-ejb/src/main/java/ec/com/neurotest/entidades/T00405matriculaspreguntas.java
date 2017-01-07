@@ -24,19 +24,53 @@ import javax.validation.constraints.Size;
  * @author crrb
  */
 @Entity
-@Table(name = "T002_02PREGUNTAS_Y_RESPUESTAS")
+@Table(name = "T004_05MATRICULASPREGUNTAS")
 @NamedQueries({
-    @NamedQuery(name = "T00202preguntasYRespuestas.findAll", query = "SELECT t FROM T00202preguntasYRespuestas t")})
-public class T00202preguntasYRespuestas implements Serializable {
+    @NamedQuery(name = "T00405matriculaspreguntas.findAll", query = "SELECT t FROM T00405matriculaspreguntas t")})
+public class T00405matriculaspreguntas implements Serializable {
 
-    private static final long serialVersionUID = 665488849764129835L;
+    private static final long serialVersionUID = -3338148655498618614L;
 
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     @Basic(optional = false)
     @NotNull
+    @Column(name = "ID_MATRIC_PREG")
+    private BigDecimal idMatricPreg;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "PREGUNTA_ACTUAL")
+    private BigInteger preguntaActual;
+    @Column(name = "DEJAR_PENDIENTE")
+    private BigInteger dejarPendiente;
+    @Column(name = "PASAR_SIGUIENTE")
+    private BigInteger pasarSiguiente;
+    @Column(name = "REGRESAR_ANTERIOR")
+    private BigInteger regresarAnterior;
+    @Column(name = "CONTESTADA")
+    private BigInteger contestada;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "ID_TESTUSUARIO")
+    private BigInteger idTestusuario;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "ID_AGRMATR")
+    private BigInteger idAgrmatr;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "ID_INSUSUA")
+    private BigInteger idInsusua;
+    @Column(name = "ORDEN_GENERAL")
+    private BigInteger ordenGeneral;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "ORDEN_PREGUNTA")
+    private BigInteger ordenPregunta;
+    @Basic(optional = false)
+    @NotNull
     @Column(name = "ID_PREGRESP")
-    private BigDecimal idPregresp;
+    private BigInteger idPregresp;
     @Size(max = 4000)
     @Column(name = "PREGUNTA")
     private String pregunta;
@@ -70,122 +104,64 @@ public class T00202preguntasYRespuestas implements Serializable {
     @Size(max = 4000)
     @Column(name = "REP_POSIBLE_10")
     private String repPosible10;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "RESP_PESO_VALOR_01")
-    private double respPesoValor01;
-    @Basic(optional = false)
-    @NotNull
+    private Double respPesoValor01;
     @Column(name = "RESP_PESO_VALOR_02")
-    private double respPesoValor02;
-    @Basic(optional = false)
-    @NotNull
+    private Double respPesoValor02;
     @Column(name = "RESP_PESO_VALOR_03")
-    private double respPesoValor03;
-    @Basic(optional = false)
-    @NotNull
+    private Double respPesoValor03;
     @Column(name = "RESP_PESO_VALOR_04")
-    private double respPesoValor04;
-    @Basic(optional = false)
-    @NotNull
+    private Double respPesoValor04;
     @Column(name = "RESP_PESO_VALOR_05")
-    private double respPesoValor05;
-    @Basic(optional = false)
-    @NotNull
+    private Double respPesoValor05;
     @Column(name = "RESP_PESO_VALOR_06")
-    private double respPesoValor06;
-    @Basic(optional = false)
-    @NotNull
+    private Double respPesoValor06;
     @Column(name = "RESP_PESO_VALOR_07")
-    private double respPesoValor07;
-    @Basic(optional = false)
-    @NotNull
+    private Double respPesoValor07;
     @Column(name = "RESP_PESO_VALOR_08")
-    private double respPesoValor08;
-    @Basic(optional = false)
-    @NotNull
+    private Double respPesoValor08;
     @Column(name = "RESP_PESO_VALOR_09")
-    private double respPesoValor09;
-    @Basic(optional = false)
-    @NotNull
+    private Double respPesoValor09;
     @Column(name = "RESP_PESO_VALOR_10")
-    private double respPesoValor10;
-    @Basic(optional = false)
-    @NotNull
+    private Double respPesoValor10;
     @Column(name = "RESP_SELECCIONUSUARIO_01")
     private BigInteger respSeleccionusuario01;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "RESP_SELECCIONUSUARIO_02")
     private BigInteger respSeleccionusuario02;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "RESP_SELECCIONUSUARIO_03")
     private BigInteger respSeleccionusuario03;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "RESP_SELECCIONUSUARIO_04")
     private BigInteger respSeleccionusuario04;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "RESP_SELECCIONUSUARIO_05")
     private BigInteger respSeleccionusuario05;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "RESP_SELECCIONUSUARIO_06")
     private BigInteger respSeleccionusuario06;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "RESP_SELECCIONUSUARIO_07")
     private BigInteger respSeleccionusuario07;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "RESP_SELECCIONUSUARIO_08")
     private BigInteger respSeleccionusuario08;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "RESP_SELECCIONUSUARIO_09")
     private BigInteger respSeleccionusuario09;
     @Column(name = "RESP_SELECCIONUSUARIO_10")
     private BigInteger respSeleccionusuario10;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "PREGUNTA_ACTIVA_01")
     private BigInteger preguntaActiva01;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "PREGUNTA_ACTIVA_02")
     private BigInteger preguntaActiva02;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "PREGUNTA_ACTIVA_03")
     private BigInteger preguntaActiva03;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "PREGUNTA_ACTIVA_04")
     private BigInteger preguntaActiva04;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "PREGUNTA_ACTIVA_05")
     private BigInteger preguntaActiva05;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "PREGUNTA_ACTIVA_06")
     private BigInteger preguntaActiva06;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "PREGUNTA_ACTIVA_07")
     private BigInteger preguntaActiva07;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "PREGUNTA_ACTIVA_08")
     private BigInteger preguntaActiva08;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "PREGUNTA_ACTIVA_09")
     private BigInteger preguntaActiva09;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "PREGUNTA_ACTIVA_10")
     private BigInteger preguntaActiva10;
     @Lob
@@ -224,51 +200,116 @@ public class T00202preguntasYRespuestas implements Serializable {
     @Column(name = "RADIOBOTON")
     private BigInteger radioboton;
 
-    public T00202preguntasYRespuestas() {
+    public T00405matriculaspreguntas() {
     }
 
-    public T00202preguntasYRespuestas(BigDecimal idPregresp) {
+    public T00405matriculaspreguntas(BigDecimal idMatricPreg) {
+        this.idMatricPreg = idMatricPreg;
+    }
+
+    public T00405matriculaspreguntas(BigDecimal idMatricPreg, BigInteger preguntaActual, BigInteger idTestusuario, BigInteger idAgrmatr, BigInteger idInsusua, BigInteger ordenPregunta, BigInteger idPregresp) {
+        this.idMatricPreg = idMatricPreg;
+        this.preguntaActual = preguntaActual;
+        this.idTestusuario = idTestusuario;
+        this.idAgrmatr = idAgrmatr;
+        this.idInsusua = idInsusua;
+        this.ordenPregunta = ordenPregunta;
         this.idPregresp = idPregresp;
     }
 
-    public T00202preguntasYRespuestas(BigDecimal idPregresp, double respPesoValor01, double respPesoValor02, double respPesoValor03, double respPesoValor04, double respPesoValor05, double respPesoValor06, double respPesoValor07, double respPesoValor08, double respPesoValor09, double respPesoValor10, BigInteger respSeleccionusuario01, BigInteger respSeleccionusuario02, BigInteger respSeleccionusuario03, BigInteger respSeleccionusuario04, BigInteger respSeleccionusuario05, BigInteger respSeleccionusuario06, BigInteger respSeleccionusuario07, BigInteger respSeleccionusuario08, BigInteger respSeleccionusuario09, BigInteger preguntaActiva01, BigInteger preguntaActiva02, BigInteger preguntaActiva03, BigInteger preguntaActiva04, BigInteger preguntaActiva05, BigInteger preguntaActiva06, BigInteger preguntaActiva07, BigInteger preguntaActiva08, BigInteger preguntaActiva09, BigInteger preguntaActiva10) {
-        this.idPregresp = idPregresp;
-        this.respPesoValor01 = respPesoValor01;
-        this.respPesoValor02 = respPesoValor02;
-        this.respPesoValor03 = respPesoValor03;
-        this.respPesoValor04 = respPesoValor04;
-        this.respPesoValor05 = respPesoValor05;
-        this.respPesoValor06 = respPesoValor06;
-        this.respPesoValor07 = respPesoValor07;
-        this.respPesoValor08 = respPesoValor08;
-        this.respPesoValor09 = respPesoValor09;
-        this.respPesoValor10 = respPesoValor10;
-        this.respSeleccionusuario01 = respSeleccionusuario01;
-        this.respSeleccionusuario02 = respSeleccionusuario02;
-        this.respSeleccionusuario03 = respSeleccionusuario03;
-        this.respSeleccionusuario04 = respSeleccionusuario04;
-        this.respSeleccionusuario05 = respSeleccionusuario05;
-        this.respSeleccionusuario06 = respSeleccionusuario06;
-        this.respSeleccionusuario07 = respSeleccionusuario07;
-        this.respSeleccionusuario08 = respSeleccionusuario08;
-        this.respSeleccionusuario09 = respSeleccionusuario09;
-        this.preguntaActiva01 = preguntaActiva01;
-        this.preguntaActiva02 = preguntaActiva02;
-        this.preguntaActiva03 = preguntaActiva03;
-        this.preguntaActiva04 = preguntaActiva04;
-        this.preguntaActiva05 = preguntaActiva05;
-        this.preguntaActiva06 = preguntaActiva06;
-        this.preguntaActiva07 = preguntaActiva07;
-        this.preguntaActiva08 = preguntaActiva08;
-        this.preguntaActiva09 = preguntaActiva09;
-        this.preguntaActiva10 = preguntaActiva10;
+    public BigDecimal getIdMatricPreg() {
+        return idMatricPreg;
     }
 
-    public BigDecimal getIdPregresp() {
+    public void setIdMatricPreg(BigDecimal idMatricPreg) {
+        this.idMatricPreg = idMatricPreg;
+    }
+
+    public BigInteger getPreguntaActual() {
+        return preguntaActual;
+    }
+
+    public void setPreguntaActual(BigInteger preguntaActual) {
+        this.preguntaActual = preguntaActual;
+    }
+
+    public BigInteger getDejarPendiente() {
+        return dejarPendiente;
+    }
+
+    public void setDejarPendiente(BigInteger dejarPendiente) {
+        this.dejarPendiente = dejarPendiente;
+    }
+
+    public BigInteger getPasarSiguiente() {
+        return pasarSiguiente;
+    }
+
+    public void setPasarSiguiente(BigInteger pasarSiguiente) {
+        this.pasarSiguiente = pasarSiguiente;
+    }
+
+    public BigInteger getRegresarAnterior() {
+        return regresarAnterior;
+    }
+
+    public void setRegresarAnterior(BigInteger regresarAnterior) {
+        this.regresarAnterior = regresarAnterior;
+    }
+
+    public BigInteger getContestada() {
+        return contestada;
+    }
+
+    public void setContestada(BigInteger contestada) {
+        this.contestada = contestada;
+    }
+
+    public BigInteger getIdTestusuario() {
+        return idTestusuario;
+    }
+
+    public void setIdTestusuario(BigInteger idTestusuario) {
+        this.idTestusuario = idTestusuario;
+    }
+
+    public BigInteger getIdAgrmatr() {
+        return idAgrmatr;
+    }
+
+    public void setIdAgrmatr(BigInteger idAgrmatr) {
+        this.idAgrmatr = idAgrmatr;
+    }
+
+    public BigInteger getIdInsusua() {
+        return idInsusua;
+    }
+
+    public void setIdInsusua(BigInteger idInsusua) {
+        this.idInsusua = idInsusua;
+    }
+
+    public BigInteger getOrdenGeneral() {
+        return ordenGeneral;
+    }
+
+    public void setOrdenGeneral(BigInteger ordenGeneral) {
+        this.ordenGeneral = ordenGeneral;
+    }
+
+    public BigInteger getOrdenPregunta() {
+        return ordenPregunta;
+    }
+
+    public void setOrdenPregunta(BigInteger ordenPregunta) {
+        this.ordenPregunta = ordenPregunta;
+    }
+
+    public BigInteger getIdPregresp() {
         return idPregresp;
     }
 
-    public void setIdPregresp(BigDecimal idPregresp) {
+    public void setIdPregresp(BigInteger idPregresp) {
         this.idPregresp = idPregresp;
     }
 
@@ -360,83 +401,83 @@ public class T00202preguntasYRespuestas implements Serializable {
         this.repPosible10 = repPosible10;
     }
 
-    public double getRespPesoValor01() {
+    public Double getRespPesoValor01() {
         return respPesoValor01;
     }
 
-    public void setRespPesoValor01(double respPesoValor01) {
+    public void setRespPesoValor01(Double respPesoValor01) {
         this.respPesoValor01 = respPesoValor01;
     }
 
-    public double getRespPesoValor02() {
+    public Double getRespPesoValor02() {
         return respPesoValor02;
     }
 
-    public void setRespPesoValor02(double respPesoValor02) {
+    public void setRespPesoValor02(Double respPesoValor02) {
         this.respPesoValor02 = respPesoValor02;
     }
 
-    public double getRespPesoValor03() {
+    public Double getRespPesoValor03() {
         return respPesoValor03;
     }
 
-    public void setRespPesoValor03(double respPesoValor03) {
+    public void setRespPesoValor03(Double respPesoValor03) {
         this.respPesoValor03 = respPesoValor03;
     }
 
-    public double getRespPesoValor04() {
+    public Double getRespPesoValor04() {
         return respPesoValor04;
     }
 
-    public void setRespPesoValor04(double respPesoValor04) {
+    public void setRespPesoValor04(Double respPesoValor04) {
         this.respPesoValor04 = respPesoValor04;
     }
 
-    public double getRespPesoValor05() {
+    public Double getRespPesoValor05() {
         return respPesoValor05;
     }
 
-    public void setRespPesoValor05(double respPesoValor05) {
+    public void setRespPesoValor05(Double respPesoValor05) {
         this.respPesoValor05 = respPesoValor05;
     }
 
-    public double getRespPesoValor06() {
+    public Double getRespPesoValor06() {
         return respPesoValor06;
     }
 
-    public void setRespPesoValor06(double respPesoValor06) {
+    public void setRespPesoValor06(Double respPesoValor06) {
         this.respPesoValor06 = respPesoValor06;
     }
 
-    public double getRespPesoValor07() {
+    public Double getRespPesoValor07() {
         return respPesoValor07;
     }
 
-    public void setRespPesoValor07(double respPesoValor07) {
+    public void setRespPesoValor07(Double respPesoValor07) {
         this.respPesoValor07 = respPesoValor07;
     }
 
-    public double getRespPesoValor08() {
+    public Double getRespPesoValor08() {
         return respPesoValor08;
     }
 
-    public void setRespPesoValor08(double respPesoValor08) {
+    public void setRespPesoValor08(Double respPesoValor08) {
         this.respPesoValor08 = respPesoValor08;
     }
 
-    public double getRespPesoValor09() {
+    public Double getRespPesoValor09() {
         return respPesoValor09;
     }
 
-    public void setRespPesoValor09(double respPesoValor09) {
+    public void setRespPesoValor09(Double respPesoValor09) {
         this.respPesoValor09 = respPesoValor09;
     }
 
-    public double getRespPesoValor10() {
+    public Double getRespPesoValor10() {
         return respPesoValor10;
     }
 
-    public void setRespPesoValor10(double respPesoValor10) {
+    public void setRespPesoValor10(Double respPesoValor10) {
         this.respPesoValor10 = respPesoValor10;
     }
 
@@ -699,18 +740,18 @@ public class T00202preguntasYRespuestas implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idPregresp != null ? idPregresp.hashCode() : 0);
+        hash += (idMatricPreg != null ? idMatricPreg.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof T00202preguntasYRespuestas)) {
+        if (!(object instanceof T00405matriculaspreguntas)) {
             return false;
         }
-        T00202preguntasYRespuestas other = (T00202preguntasYRespuestas) object;
-        if ((this.idPregresp == null && other.idPregresp != null) || (this.idPregresp != null && !this.idPregresp.equals(other.idPregresp))) {
+        T00405matriculaspreguntas other = (T00405matriculaspreguntas) object;
+        if ((this.idMatricPreg == null && other.idMatricPreg != null) || (this.idMatricPreg != null && !this.idMatricPreg.equals(other.idMatricPreg))) {
             return false;
         }
         return true;
@@ -718,7 +759,7 @@ public class T00202preguntasYRespuestas implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.com.neurotest.entidades.T00202preguntasYRespuestas[ idPregresp=" + idPregresp + " ]";
+        return "ec.com.neurotest.entidades.T00405matriculaspreguntas[ idMatricPreg=" + idMatricPreg + " ]";
     }
     
 }

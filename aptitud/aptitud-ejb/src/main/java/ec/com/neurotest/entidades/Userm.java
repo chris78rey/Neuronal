@@ -7,7 +7,6 @@ package ec.com.neurotest.entidades;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -29,20 +28,15 @@ import javax.validation.constraints.Size;
 @Table(name = "T001_01USUARIOS")
 @NamedQueries({
     @NamedQuery(name = "T00101usuarios.findAll", query = "SELECT t FROM T00101usuarios t")})
-public class T00101usuarios implements Serializable {
+public class Userm implements Serializable {
 
-    private static final long serialVersionUID = 3694789920527537677L;
-
+    private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     @Basic(optional = false)
     @NotNull
     @Column(name = "ID_USUARIO")
     private BigDecimal idUsuario;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "ID_LOCALIZACION_DIRECCION")
-    private BigInteger idLocalizacionDireccion;
     @Size(max = 150)
     @Column(name = "DIRECCION")
     private String direccion;
@@ -73,16 +67,15 @@ public class T00101usuarios implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaCreacion;
 
-    public T00101usuarios() {
+    public Userm() {
     }
 
-    public T00101usuarios(BigDecimal idUsuario) {
+    public Userm(BigDecimal idUsuario) {
         this.idUsuario = idUsuario;
     }
 
-    public T00101usuarios(BigDecimal idUsuario, BigInteger idLocalizacionDireccion, String nombre, String apellido) {
+    public Userm(BigDecimal idUsuario, String nombre, String apellido) {
         this.idUsuario = idUsuario;
-        this.idLocalizacionDireccion = idLocalizacionDireccion;
         this.nombre = nombre;
         this.apellido = apellido;
     }
@@ -93,14 +86,6 @@ public class T00101usuarios implements Serializable {
 
     public void setIdUsuario(BigDecimal idUsuario) {
         this.idUsuario = idUsuario;
-    }
-
-    public BigInteger getIdLocalizacionDireccion() {
-        return idLocalizacionDireccion;
-    }
-
-    public void setIdLocalizacionDireccion(BigInteger idLocalizacionDireccion) {
-        this.idLocalizacionDireccion = idLocalizacionDireccion;
     }
 
     public String getDireccion() {
@@ -180,7 +165,7 @@ public class T00101usuarios implements Serializable {
         if (!(object instanceof T00101usuarios)) {
             return false;
         }
-        T00101usuarios other = (T00101usuarios) object;
+        Userm other = (Userm) object;
         if ((this.idUsuario == null && other.idUsuario != null) || (this.idUsuario != null && !this.idUsuario.equals(other.idUsuario))) {
             return false;
         }

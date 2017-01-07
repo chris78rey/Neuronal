@@ -7,13 +7,11 @@ package ec.com.neurotest.entidades;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -29,19 +27,18 @@ import javax.validation.constraints.NotNull;
     @NamedQuery(name = "T00203agrupaPreguntas.findAll", query = "SELECT t FROM T00203agrupaPreguntas t")})
 public class T00203agrupaPreguntas implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = -4064826150560308519L;
+
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     @Basic(optional = false)
     @NotNull
     @Column(name = "ID_AGRUPA_PREGUNTAS")
     private BigDecimal idAgrupaPreguntas;
-    @JoinColumn(name = "ID_PREGRESP", referencedColumnName = "ID_PREGRESP")
-    @ManyToOne(fetch = FetchType.LAZY)
-    private T00202preguntasYRespuestas t00202preguntasYRespuestas;
-    @JoinColumn(name = "ID_AGRUPADOR", referencedColumnName = "ID_AGRUPADOR")
-    @ManyToOne(fetch = FetchType.LAZY)
-    private T00201agrupador t00201agrupador;
+    @Column(name = "ID_AGRUPADOR")
+    private BigInteger idAgrupador;
+    @Column(name = "ID_PREGRESP")
+    private BigInteger idPregresp;
 
     public T00203agrupaPreguntas() {
     }
@@ -58,20 +55,20 @@ public class T00203agrupaPreguntas implements Serializable {
         this.idAgrupaPreguntas = idAgrupaPreguntas;
     }
 
-    public T00202preguntasYRespuestas getT00202preguntasYRespuestas() {
-        return t00202preguntasYRespuestas;
+    public BigInteger getIdAgrupador() {
+        return idAgrupador;
     }
 
-    public void setT00202preguntasYRespuestas(T00202preguntasYRespuestas t00202preguntasYRespuestas) {
-        this.t00202preguntasYRespuestas = t00202preguntasYRespuestas;
+    public void setIdAgrupador(BigInteger idAgrupador) {
+        this.idAgrupador = idAgrupador;
     }
 
-    public T00201agrupador getT00201agrupador() {
-        return t00201agrupador;
+    public BigInteger getIdPregresp() {
+        return idPregresp;
     }
 
-    public void setT00201agrupador(T00201agrupador t00201agrupador) {
-        this.t00201agrupador = t00201agrupador;
+    public void setIdPregresp(BigInteger idPregresp) {
+        this.idPregresp = idPregresp;
     }
 
     @Override

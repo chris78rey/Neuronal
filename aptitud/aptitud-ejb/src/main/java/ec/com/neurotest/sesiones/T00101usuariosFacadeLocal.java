@@ -29,5 +29,5 @@ public interface T00101usuariosFacadeLocal {
     List<T00101usuarios> findRange(int[] range);
 
     int count();
-    
+
 }
