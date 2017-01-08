@@ -30,8 +30,7 @@ import javax.validation.constraints.NotNull;
     @NamedQuery(name = "T00402inscripcionusuarios.findAll", query = "SELECT t FROM T00402inscripcionusuarios t")})
 public class T00402inscripcionusuarios implements Serializable {
 
-    private static final long serialVersionUID = -3947405458278582249L;
-
+    private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     @Basic(optional = false)

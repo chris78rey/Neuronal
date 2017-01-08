@@ -29,8 +29,7 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "T00405matriculaspreguntas.findAll", query = "SELECT t FROM T00405matriculaspreguntas t")})
 public class T00405matriculaspreguntas implements Serializable {
 
-    private static final long serialVersionUID = -3338148655498618614L;
-
+    private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     @Basic(optional = false)

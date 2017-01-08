@@ -15,37 +15,40 @@
 
     </ui:define>
     <ui:define name="body">
-
-
-
-
-
-        <h1><h:outputText value="Create/Edit"/></h1>
-        <p:panelGrid columns="2">
-            <p:outputLabel value="IdUsuario:" for="idUsuario" />
-            <p:inputText id="idUsuario" value="#{mb1.t00101usuarios.idUsuario}" title="IdUsuario" required="true" requiredMessage="The IdUsuario field is required."/>
-            <p:outputLabel value="Direccion:" for="direccion" />
-            <p:inputText id="direccion" value="#{mb1.t00101usuarios.direccion}" title="Direccion" />
-            <p:outputLabel value="Nombre:" for="nombre" />
-            <p:inputText id="nombre" value="#{mb1.t00101usuarios.nombre}" title="Nombre" required="true" requiredMessage="The Nombre field is required."/>
-            <p:outputLabel value="Apellido:" for="apellido" />
-            <p:inputText id="apellido" value="#{mb1.t00101usuarios.apellido}" title="Apellido" required="true" requiredMessage="The Apellido field is required."/>
-            <p:outputLabel value="Email:" for="email" />
-            <p:inputText id="email" value="#{mb1.t00101usuarios.email}" title="Email" />
-            <p:outputLabel value="Celular:" for="celular" />
-            <p:inputText id="celular" value="#{mb1.t00101usuarios.celular}" title="Celular" />
-            <p:outputLabel value="TelefonoHogar:" for="telefonoHogar" />
-            <p:inputText id="telefonoHogar" value="#{mb1.t00101usuarios.telefonoHogar}" title="TelefonoHogar" />
-            <p:outputLabel value="Clave:" for="clave" />
-            <p:inputText id="clave" value="#{mb1.t00101usuarios.clave}" title="Clave" />
-            <p:outputLabel value="FechaCreacion:" for="fechaCreacion" />
-            <p:inputText id="fechaCreacion" value="#{mb1.t00101usuarios.fechaCreacion}" title="FechaCreacion" >
-                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-            </p:inputText>
-            <p:outputLabel value="IdLocalizacionDireccion:" for="idLocalizacionDireccion" />
-            <p:inputText id="idLocalizacionDireccion" value="#{mb1.t00101usuarios.idLocalizacionDireccion}" title="IdLocalizacionDireccion" required="true" requiredMessage="The IdLocalizacionDireccion field is required."/>
-        </p:panelGrid>
-
+         <footer class="section section-primary">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6">
+            <h1>Footer header</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisici elit,
+              <br/>sed eiusmod tempor incidunt ut labore et dolore magna aliqua.
+              <br/>Ut enim ad minim veniam, quis nostrud</p>
+          </div>
+          <div class="col-sm-6">
+            <p class="text-info text-right">
+              <br/>
+              <br/>
+            </p>
+            <div class="row">
+              <div class="col-md-12 hidden-lg hidden-md hidden-sm text-left">
+                <a href="#"><i class="fa fa-3x fa-fw fa-instagram text-inverse"></i></a>
+                <a href="#"><i class="fa fa-3x fa-fw fa-twitter text-inverse"></i></a>
+                <a href="#"><i class="fa fa-3x fa-fw fa-facebook text-inverse"></i></a>
+                <a href="#"><i class="fa fa-3x fa-fw fa-github text-inverse"></i></a>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 hidden-xs text-right">
+                <a href="#"><i class="fa fa-3x fa-fw fa-instagram text-inverse"></i></a>
+                <a href="#"><i class="fa fa-3x fa-fw fa-twitter text-inverse"></i></a>
+                <a href="#"><i class="fa fa-3x fa-fw fa-facebook text-inverse"></i></a>
+                <a href="#"><i class="fa fa-3x fa-fw fa-github text-inverse"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
 
     </ui:define>
 
