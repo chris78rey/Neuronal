@@ -1,0 +1,98 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+        <h:outputStylesheet name="css/jsfcrud.css"/>
+    </h:head>
+    <h:body>
+        Hello from Facelets
+
+        <h:form id="f1">
+            <h1><h:outputText value="Create/Edit"/></h1>
+            <p:panelGrid columns="2">
+                <p:outputLabel value="Agrupador Examen:" for="idagr" />
+                <p:selectOneMenu id="idagr"  value="#{itemMB.selected.idfk}" >
+                    <f:selectItem itemLabel="Select One" itemValue="" />
+                    <f:selectItems  value="#{itemMB.listaGruposExamenesImagenes}" var="registro" 
+                                    itemValue="#{registro.id}" 
+                                    itemLabel="#{registro.descripcion}"
+                                    />                </p:selectOneMenu>
+                <p:outputLabel value="Descripcion:" for="descripcion" />
+                <p:inputText id="descripcion" size="100" value="#{itemMB.selected.descripcion}" title="Descripcion" required="true" requiredMessage="The Descripcion field is required."/>
+                <p:outputLabel value="SinDescuento:" for="sinDescuento" />
+                <p:inputText id="sinDescuento" value="#{itemMB.selected.sinDescuento}" title="SinDescuento" />
+                <p:outputLabel value="ConDescuento:" for="conDescuento" />
+                <p:inputText id="conDescuento" value="#{itemMB.selected.conDescuento}" title="ConDescuento" />
+
+            </p:panelGrid>
+            <p:commandButton actionListener="#{itemMB.buttonActionNuevo}" id="iconOnly3" update="f2 f1" value="Nuevo" />
+
+            <p:commandButton actionListener="#{itemMB.buttonAction}" id="iconOnly" update="f2 f1" value="Grabar" />
+            <p:commandButton actionListener="#{itemMB.buttonActionEditar}" id="iconOnly2" update="f2 f1" value="Actualizar Datos"/>
+            <p:commandButton actionListener="#{itemMB.buttonActionElim}" id="iconOnly4" update="f2 f1" value="Eliminar" />
+
+        </h:form>
+
+
+
+
+
+
+
+
+        <h:form id="f2">
+
+
+
+
+            #{itemMB.selected.jerarquia}
+            <h1><h:outputText value="List"/></h1>
+            <p:dataTable id="t1" value="#{itemMB.list1}" var="item"
+                         reflow="true"
+                         selectionMode="single" 
+                         selection="#{itemMB.selected}"
+                         paginator="true"
+                         rowKey="#{item.id}"
+                         rows="1000"
+                         rowsPerPageTemplate="10,20,30,40,50"
+                         >
+                <p:ajax event="rowSelect" process="@this"  update="f1"/>
+                <p:ajax event="rowUnselect" process="@this" update="f1"/>
+
+                <p:column
+                    filterBy="#{item.descripcion}" 
+                    filterMatchMode="contains"
+                    >
+                    <f:facet name="header">
+                        <h:outputText value="Jerarquia"/>
+                    </f:facet>
+                    <h:outputText value="#{item.jerarquia}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="SinDescuento"/>
+                    </f:facet>
+                    <h:outputText value="#{item.sinDescuento}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="ConDescuento"/>
+                    </f:facet>
+                    <h:outputText value="#{item.conDescuento}"/>
+                </p:column>
+
+            </p:dataTable>
+            <h3>Export Page Data Only</h3>
+
+
+        </h:form>
+
+
+    </h:body>
+
+</html>
+

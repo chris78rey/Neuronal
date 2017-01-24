@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+        <h:outputStylesheet name="css/jsfcrud.css"/>
+    </h:head>
+    <body>
+        <div>TODO write content</div>
+
+
+
+        <h:form id="f1">
+            <h1><h:outputText value="Create/Edit"/></h1>
+            <p:panelGrid columns="2">
+
+                <p:outputLabel value="Centromedico:" for="centromedico" />
+                <p:inputText id="centromedico" value="#{referidosMB.selected.centromedico}" title="Centromedico" />
+                <p:outputLabel value="Participacion:" for="participacion" />
+                <p:inputText id="participacion" value="#{referidosMB.selected.participacion}" title="Participacion" required="true" requiredMessage="The Participacion field is required."/>
+
+                <p:outputLabel value="Cc:" for="cc" />
+                <p:inputText id="cc" value="#{referidosMB.selected.cc}" title="Cc" />
+                <p:outputLabel value="Nombre:" for="nombre" />
+                <p:inputText id="nombre" value="#{referidosMB.selected.nombre}" title="Nombre" />
+                <p:outputLabel value="Apellido:" for="apellido" />
+                <p:inputText id="apellido" value="#{referidosMB.selected.apellido}" title="Apellido" />
+                <p:outputLabel value="CorreoElectronico:" for="correoElectronico" />
+                <p:inputText id="correoElectronico" value="#{referidosMB.selected.correoElectronico}" title="CorreoElectronico" />
+                <p:outputLabel value="Direccion:" for="direccion" />
+                <p:inputText id="direccion" value="#{referidosMB.selected.direccion}" title="Direccion" />
+                <p:outputLabel value="Telefono:" for="telefono" />
+                <p:inputText id="telefono" value="#{referidosMB.selected.telefono}" title="Telefono" />
+                <p:outputLabel value="Celular:" for="celular" />
+                <p:inputText id="celular" value="#{referidosMB.selected.celular}" title="Celular" />
+            </p:panelGrid>
+            <p:commandButton actionListener="#{referidosMB.buttonActionNuevo(actionEvent)}" id="iconOnly3" update="f2 f1" value="Nuevo" />
+
+            <p:commandButton actionListener="#{referidosMB.buttonActionGrabar(actionEvent)}" id="iconOnly" update="f2 f1" value="Grabar" />
+            <p:commandButton actionListener="#{referidosMB.buttonActionActualizar(actionEvent)}" id="iconOnly2" update="f2 f1" value="Actualizar Datos"/>
+            <p:commandButton actionListener="#{referidosMB.buttonActionEliminar(actionEvent)}" id="iconOnly4" update="f2 f1" value="Eliminar" />
+
+        </h:form>
+
+
+
+        <h:form id="f2">
+            <h1><h:outputText value="List"/></h1>
+            <p:dataTable value="#{referidosMB.listamedicosRefieren}" var="item"
+                         selectionMode="single" 
+                         selection="#{referidosMB.selected}"
+                         reflow="true"
+                         paginator="true"
+                         rowKey="#{item.idPersona}"
+                         rows="50"
+                         rowsPerPageTemplate="10,20,30,40,50"
+                         >
+                <p:ajax event="rowSelect"   update="f1"/>
+                <p:ajax event="rowUnselect" update="f1"/>
+
+
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Centromedico"/>
+                    </f:facet>
+                    <h:outputText value="#{item.centromedico}"/>
+                </p:column>
+                <p:column filterBy="#{item.cc}" 
+                          filterMatchMode="contains"
+                          >
+                    <f:facet name="header">
+                        <h:outputText value="Cc"/>
+                    </f:facet>
+                    <h:outputText value="#{item.cc}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Participacion"/>
+                    </f:facet>
+                    <h:outputText value="#{item.participacion}"/>
+                </p:column>
+                <p:column filterBy="#{item.nombre}" 
+                          filterMatchMode="contains"
+                          >
+                    <f:facet name="header">
+                        <h:outputText value="Nombre"/>
+                    </f:facet>
+                    <h:outputText value="#{item.nombre}"/>
+                </p:column>
+                <p:column filterBy="#{item.apellido}" 
+                          filterMatchMode="contains"
+                          >
+                    <f:facet name="header">
+                        <h:outputText value="Apellido"/>
+                    </f:facet>
+                    <h:outputText value="#{item.apellido}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="CorreoElectronico"/>
+                    </f:facet>
+                    <h:outputText value="#{item.correoElectronico}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Direccion"/>
+                    </f:facet>
+                    <h:outputText value="#{item.direccion}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Telefono"/>
+                    </f:facet>
+                    <h:outputText value="#{item.telefono}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Celular"/>
+                    </f:facet>
+                    <h:outputText value="#{item.celular}"/>
+                </p:column>
+
+            </p:dataTable>
+        </h:form>
+
+    </body>
+</html>
