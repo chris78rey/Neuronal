@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <body>
+        <ui:composition template="./../menu/menu.xhtml">
+            <ui:define name="body">
+
+                <h:form>
+                    <h1><h:outputText value="List"/></h1>
+                    <p:dataTable value="#{listapacientesMB.listapacientes}" var="item"
+
+                                 id="dt1"
+                                 selectionMode="single" 
+                                 selection="#{listapacientesMB.selected}"
+                                 reflow="true"
+                                 paginator="true"
+                                 rowKey="#{item.id}"
+                                 rows="50"
+                                 rowsPerPageTemplate="10,20,30,40,50" 
+
+                                 >
+
+                        <p:ajax event="rowSelect" process="@this"  update="@form"/>
+                        <p:ajax event="rowUnselect" process="@this"  update="@form"/>
+
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Nombre"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nombre}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Item"/>
+                            </f:facet>
+                            <h:outputText value="#{item.item}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Paciente"/>
+                            </f:facet>
+                            <h:outputText value="#{item.paciente}"/>
+                        </p:column>
+                    </p:dataTable>
+                    <p:commandButton actionListener="#{listapacientesMB.buttonAction}" process="@form" update="dt1" value="Cierre de Atención" />
+
+                </h:form>
+
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

@@ -4,8 +4,8 @@
  */
 package ec.com.neurotest;
 
-import javax.ejb.Stateless;
 import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
 
 /**
  *
@@ -15,7 +15,8 @@ import javax.ejb.LocalBean;
 @LocalBean
 public class NewSessionBean {
 
-    public void businessMethod() {
+    public int retorna6() {
+        return 6;
     }
 
     // Add business logic below. (Right-click in editor and choose

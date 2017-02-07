@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Facelet Title</title>
+        <h:outputStylesheet name="css/jsfcrud.css"/>
+        <h:outputStylesheet name="css/cssLayout.css"/>
+        <h:outputStylesheet name="css/default.css"/>
+    </h:head>
+    <body>
+        <h:form id="formamenu">
+            <p:menubar>
+                <p:submenu label="Parametrización" icon="ui-icon-document">
+
+                    <p:menuitem value="Lista de Precios" url="/faces/mantenimiento/Items.xhtml" />
+                    <p:menuitem value="Asociar Items" url="/faces/mantenimiento/estadoitems.xhtml" />
+                    <p:menuitem value="Referencias" url="/faces/mantenimiento/referidos.xhtml" />
+                    <p:menuitem value="Personal" url="/faces/mantenimiento/empleados.xhtml" />
+
+
+                </p:submenu>
+                <p:submenu label="Exámenes" icon="ui-icon-document">
+
+                    <p:menuitem value="Pedido" url="/faces/mantenimiento/solicfactura.xhtml" />
+                    <p:menuitem value="Pacientes por atender" url="/faces/mantenimiento/listapacientes.xhtml" />
+                    <p:menuitem value="Reporte de cierre" url="/faces/mantenimiento/cierre.xhtml" />
+
+
+                </p:submenu>
+            </p:menubar>
+        </h:form>
+
+        <ui:insert name="body">
+
+        </ui:insert>
+    </body>
+</html>

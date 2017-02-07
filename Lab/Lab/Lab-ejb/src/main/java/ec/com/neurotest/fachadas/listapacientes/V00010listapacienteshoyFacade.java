@@ -3,10 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ec.com.neurotest.fachadas.empleado;
+package ec.com.neurotest.fachadas.listapacientes;
 
-import ec.com.neurotest.entidades.empleado.V00002empleado;
-import ec.com.neurotest.fachadas.AbstractFacade;
+import ec.com.neurotest.entidades.listapacientes.V00010listapacienteshoy;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -16,7 +15,7 @@ import javax.persistence.PersistenceContext;
  * @author crrb
  */
 @Stateless
-public class V00002empleadoFacade extends AbstractFacade<V00002empleado> {
+public class V00010listapacienteshoyFacade extends AbstractFacade<V00010listapacienteshoy> {
 
     @PersistenceContext(unitName = "ec.com.neurotest_Lab-ejb_ejb_1.0-SNAPSHOTPU")
     private EntityManager em;
@@ -26,8 +25,8 @@ public class V00002empleadoFacade extends AbstractFacade<V00002empleado> {
         return em;
     }
 
-    public V00002empleadoFacade() {
-        super(V00002empleado.class);
+    public V00010listapacienteshoyFacade() {
+        super(V00010listapacienteshoy.class);
     }
 
 }

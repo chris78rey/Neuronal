@@ -2,10 +2,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-    <artifactId>Lab</artifactId>
-    <groupId>ec.com.neurotest</groupId>
-    <version>1.0-SNAPSHOT</version>
-  </parent>
+        <artifactId>Lab</artifactId>
+        <groupId>ec.com.neurotest</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
 
     <groupId>ec.com.neurotest</groupId>
     <artifactId>Lab-web</artifactId>
@@ -24,6 +24,11 @@
             <groupId>org.primefaces</groupId>
             <artifactId>primefaces</artifactId>
             <version>5.3</version>
+        </dependency>
+        <dependency>
+            <groupId>net.sf.jasperreports</groupId>
+            <artifactId>jasperreports</artifactId>
+            <version>5.6.0</version>
         </dependency>
         <dependency>
             <groupId>ec.com.neurotest</groupId>

@@ -15,14 +15,10 @@
     </servlet-mapping>
     <session-config>
         <session-timeout>
-            30
+            -1
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>faces/mantenimiento/GrupoExaImaLab.xhtml</welcome-file>
-        <welcome-file>faces/mantenimiento/referidos.xhtml</welcome-file>
-        <welcome-file>faces/mantenimiento/List.xhtml</welcome-file>
-        <welcome-file>faces/mantenimiento/empleados.xhtml</welcome-file>
-        <welcome-file>faces/index.xhtml</welcome-file>
+        <welcome-file>faces/mantenimiento/Items.xhtml</welcome-file>
     </welcome-file-list>
 </web-app>

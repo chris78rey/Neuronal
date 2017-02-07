@@ -31,4 +31,6 @@ public interface ReglasNegocioLocal {
 
     public Items find(Object id);
 
+    public List<Items> getListaItemsLaboratoriosingrupos();
+
 }

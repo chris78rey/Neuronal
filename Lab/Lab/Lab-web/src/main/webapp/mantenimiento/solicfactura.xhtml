@@ -1,0 +1,359 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <body>
+        <ui:composition template="./../menu/menu.xhtml">
+            <ui:define name="body">
+
+
+                <h:form id="f3">
+                    <p:commandButton value="Cliente" onclick="PF('dlg100').show();" type="button" />               
+
+                    #{solicitudes.selected.cc}-#{solicitudes.selected.nombre}-#{solicitudes.selected.apellido}
+                </h:form>
+
+                <p:dialog header="Header" widgetVar="dlg100" showEffect="pop">
+                    <h:form id="f2">
+
+
+
+                        <h1><h:outputText value="List"/></h1>
+                        <p:dataTable value="#{solicitudes.listadelosquefacturan}" var="item"
+                                     selectionMode="single" 
+                                     selection="#{solicitudes.selected}"
+                                     reflow="true"
+                                     paginator="true"
+                                     rowKey="#{item.id}"
+                                     rows="5"
+                                     rowsPerPageTemplate="10,20,30,40,50"
+                                     >
+                            <p:ajax event="rowSelect" process="@this"  update="f2 f1 f3"/>
+                            <p:ajax event="rowUnselect" process="@this" update="f2 f1 f3"/>
+
+
+                            <p:column
+                                filterBy="#{item.cc}" 
+                                filterMatchMode="contains"
+
+                                >
+                                <f:facet name="header">
+                                    <h:outputText value="Cc"/>
+                                </f:facet>
+                                <h:outputText value="#{item.cc}"/>
+                            </p:column>
+                            <p:column
+                                filterBy="#{item.nombre}" 
+                                filterMatchMode="contains"
+
+                                >
+                                <f:facet name="header">
+                                    <h:outputText value="Nombre"/>
+                                </f:facet>
+                                <h:outputText value="#{item.nombre}"/>
+                            </p:column>
+                            <p:column
+                                filterBy="#{item.apellido}" 
+                                filterMatchMode="contains"
+
+                                >
+                                <f:facet name="header">
+                                    <h:outputText value="Apellido"/>
+                                </f:facet>
+                                <h:outputText value="#{item.apellido}"/>
+                            </p:column>
+                        </p:dataTable>
+                    </h:form>
+
+
+                    <h:form id="f1">
+                        <p:commandButton actionListener="#{solicitudes.buttonActionNuevo(actionEvent)}" id="cbb1" update="f1 f2 f3" value="Nuevo" /> 
+                        <p:commandButton actionListener="#{solicitudes.buttonActionGrabar(actionEvent)}" id="cbb2" update="f1 f2 f3" value="Grabar" />
+                        <p:commandButton actionListener="#{solicitudes.buttonActionActualizar(actionEvent)}" id="cbb3" update="f1 f2 f3" value="Actualizar Datos"/>
+
+
+                        <h1><h:outputText value="Create/Edit"/></h1>
+                        <p:panelGrid   columns="8">
+
+                            <p:outputLabel value="Cc:" for="cc" />
+                            <p:inputText id="cc" value="#{solicitudes.selected.cc}" title="Cc" required="true" requiredMessage="The Cc field is required."/>
+                            <p:outputLabel value="Nombre:" for="nombre" />
+                            <p:inputText id="nombre" value="#{solicitudes.selected.nombre}" title="Nombre" required="true" requiredMessage="The Nombre field is required."/>
+                            <p:outputLabel value="Apellido:" for="apellido" />
+                            <p:inputText id="apellido" value="#{solicitudes.selected.apellido}" title="Apellido" required="true" requiredMessage="The Apellido field is required."/>
+                            <p:outputLabel value="CorreoElectronico:" for="correoElectronico" />
+                            <p:inputText id="correoElectronico" value="#{solicitudes.selected.correoElectronico}" title="CorreoElectronico" />
+                            <p:outputLabel value="Direccion:" for="direccion" />
+                            <p:inputText id="direccion" value="#{solicitudes.selected.direccion}" title="Direccion" />
+                            <p:outputLabel value="Telefono:" for="telefono" />
+                            <p:inputText id="telefono" value="#{solicitudes.selected.telefono}" title="Telefono" />
+                            <p:outputLabel value="Celular:" for="celular" />
+                            <p:inputText id="celular" value="#{solicitudes.selected.celular}" title="Celular" />
+                        </p:panelGrid>
+
+
+
+
+                    </h:form>
+
+                </p:dialog>
+
+
+
+
+
+                <h:form>
+                    <h1><h:outputText value="List"/></h1>
+
+                    <p:commandButton value="Referencias" onclick="PF('dlg1referencia').show();" type="button" />               
+                    <p:commandButton actionListener="#{solicitudes.limpiaref}"  update="@form" value="Quitar Referencia"  />
+                    #{solicitudes.selectedMedicoRefiereO.centromedico}-#{solicitudes.selectedMedicoRefiereO.apellido}-#{solicitudes.selectedMedicoRefiereO.nombre}
+                    <p:dialog header="Header" widgetVar="dlg1referencia" showEffect="pop">
+                        <p:dataTable value="#{solicitudes.listaRefierenCentrosMedicos}" var="item"
+                                     selectionMode="single" 
+                                     selection="#{solicitudes.selectedMedicoRefiereO}"
+                                     reflow="true"
+                                     paginator="true"
+                                     rowKey="#{item.idPersona}"
+                                     rows="10"
+                                     rowsPerPageTemplate="10,20,30,40,50"
+                                     >
+
+                            <p:ajax event="rowSelect"   update="@form"/>
+                            <p:ajax event="rowUnselect" update="@form"/>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Centromedico"/>
+                                    **8                   </f:facet>
+                                <h:outputText value="#{item.centromedico}"/>
+                            </p:column>
+
+                            <p:column>
+
+                                <f:facet name="header">
+                                    <h:outputText value="Nombre"/>
+                                </f:facet>
+                                <h:outputText value="#{item.nombre}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Apellido"/>
+                                </f:facet>
+                                <h:outputText value="#{item.apellido}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Participacion"/>
+                                </f:facet>
+                                <h:outputText value="#{item.participacion}"/>
+                            </p:column>
+                        </p:dataTable>
+
+                    </p:dialog>
+
+                </h:form>
+
+
+                <h:form id="forma3">
+                    <p:growl id="msg" />
+
+
+                    <p:dialog header="Header" widgetVar="dlg1" showEffect="pop">
+                        <p:panelGrid columns="2">
+                            <p:panelGrid columns="1">
+
+                                <h1><h:outputText value="List"/></h1>
+                                <p:commandButton process="@form" actionListener="#{solicitudes.buttonActionPasaLista(actionEvent)}" id="idd" value="Agregar Selección" update="dtdestino form4"  />
+
+                                <p:dataTable value="#{solicitudes.listaItemsLaboratorio}" var="item"
+                                             selectionMode="single" 
+                                             selection="#{solicitudes.itemseleccionado}"
+                                             reflow="true"
+
+                                             rowKey="#{item.id}"
+
+
+
+                                             paginator="true"
+
+                                             rows="5"
+                                             rowsPerPageTemplate="10,20,30,40,50"
+
+
+                                             >
+
+
+
+                                    <p:ajax event="rowSelect" process="@this"   update=":forma3:dtdestino form4"/>
+                                    <p:ajax event="rowUnselect"  process="@this" update=":forma3:dtdestino form4"/>
+                                    <p:column
+                                        filterBy="#{item.descripcion}" 
+                                        filterMatchMode="contains"
+
+                                        >
+                                        <f:facet name="header">
+                                            <h:outputText value="Descripcion"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.descripcion}"/>
+                                    </p:column>
+                                </p:dataTable>
+
+                                <p:outputLabel for="persasi" value="Atiende:"/>
+                                <p:selectOneMenu id="persasi" required="true" requiredMessage="Debe seleccionar a la persona que va a atender" value="#{solicitudes.idempleado}"  >
+                                    <f:selectItem itemLabel="Select One" noSelectionOption="true" />
+                                    <f:selectItems  value="#{solicitudes.listaempleadounido}" var="fila" itemValue="#{fila.idempleado}" itemLabel="#{fila.nombre}"/>
+                                </p:selectOneMenu>
+                            </p:panelGrid>
+
+                            <p:panelGrid columns="1">
+                                <h1><h:outputText value="List"/></h1>
+
+                                <p:commandButton process="@this" actionListener="#{solicitudes.EliminaseleccionActionPasaLista(actionEvent)}" id="iddel" value="Limpia Lista Examenes" update="dtdestino form4"  />
+
+                                <p:dataTable id="dtdestino" value="#{solicitudes.listaitemsofertadosconcostoseleccion}" var="item"
+
+                                             selectionMode="single" 
+                                             selection="#{solicitudes.seleccionadoparaeliminar}"
+                                             reflow="true"
+                                             paginator="true"
+                                             rowKey="#{item.id}"
+                                             rows="10"
+                                             rowsPerPageTemplate="10,20,30,40,50"
+                                             tableStyleClass="ui-table-columntoggle"
+                                             >
+
+                                    <p:ajax event="rowSelect"    update="dtdestino form4"/>
+                                    <p:ajax event="rowUnselect" update="dtdestino form4"/>
+
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Descripcion"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.descripcion}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Descripcion"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.idempleado}"/>
+                                    </p:column>
+                                </p:dataTable>
+
+                            </p:panelGrid>
+
+                        </p:panelGrid>
+
+                    </p:dialog>
+                    <p:commandButton update="form4" value="Lista de precios" onclick="PF('dlg1').show();" type="button" />               
+                </h:form>
+                <h:form id="form4" >
+
+                    <p:dataTable id="dtdestino" value="#{solicitudes.listaitemsofertadosconcostoseleccion}" var="item" >
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Descripcion"/>
+                            </f:facet>
+                            <h:outputText value="#{item.descripcion}"/>
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
+                <h:form id="form3">
+                    <p:growl id="msg" />
+                    <h:outputText value="Activar Descuento: " />
+                    <p:inputSwitch value="#{solicitudes.valorswitch}">
+                        <p:ajax listener="#{solicitudes.addMessage}" update="msg" />
+                    </p:inputSwitch>
+                </h:form>
+
+
+
+                <h:form>
+
+                    <p:growl id="msg" />
+
+
+
+                    <h1><h:outputText value="Create/Edit"/></h1>
+                    <p:panelGrid columns="2">
+                        <p:outputLabel value="NFactura" for="numeroSolic" />
+                        <p:inputText id="numeroSolic" value="#{solicitudes.guardacabesolicitudmb.numeroSolic}" title="NumeroSolic" />
+
+
+
+
+                        <p:outputLabel value="FechaSolicitud:" for="fechaSolicitud" />
+                        <p:calendar id="fechaSolicitud" value="#{solicitudes.guardacabesolicitudmb.fechaSolicitud}" showOn="button" />
+
+
+
+
+
+
+
+
+
+                    </p:panelGrid>
+                    <p:commandButton disabled="#{solicitudes.inactibaguardar}" process="@form"    value="Grabar pedido" >
+                        <p:ajax listener="#{solicitudes.addMessageGrabar}" process="@form" update="@form formadetalle" />
+
+                    </p:commandButton>
+
+                </h:form>
+
+                <f:view>
+
+
+                    <h:form id="formadetalle">
+                        <h1><h:outputText value="List"/></h1>
+                        <p:dataTable value="#{solicitudes.listafacturaconsumasdetalle}" var="item">
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Item"/>
+                                </f:facet>
+                                <h:outputText value="#{item.item}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Subtotal"/>
+                                </f:facet>
+                                <h:outputText value="#{item.subtotal}"/>
+                            </p:column>
+                            <p:column>
+
+                                <f:facet name="header">
+                                    <h:outputText value="iva"/>
+                                </f:facet>
+                                <h:outputText value="#{item.montoIva}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="TotalEnFactura"/>
+                                </f:facet>
+                                <h:outputText value="#{item.totalEnFactura}"/>
+                            </p:column>
+                        </p:dataTable>
+
+                        <h1><h:outputText value="List"/></h1>
+                        <p:dataTable value="#{solicitudes.ltotalfact}" var="item">
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Total"/>
+                                </f:facet>
+                                <h:outputText value="#{item.total}"/>
+                            </p:column>
+
+                        </p:dataTable>
+
+                    </h:form>
+                </f:view>
+
+
+
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

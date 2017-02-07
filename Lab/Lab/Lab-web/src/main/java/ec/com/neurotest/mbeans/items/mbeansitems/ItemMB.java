@@ -72,29 +72,35 @@ public class ItemMB implements Serializable {
         this.selected = selected;
     }
 
-    public void buttonAction(ActionEvent actionEvent) {
+    public void buttonActionNuevo(ActionEvent actionEvent) {
+
+        selected = new Items();
+        list1 = reglasNegocio.getListaItemsLaboratorio();
+
+    }
+
+    public void buttonActionGrabar(ActionEvent actionEvent) {
         refrescar = 0;
         selected.setDescripcion(selected.getDescripcion().toUpperCase());
         create(selected);
 
         list1 = reglasNegocio.getListaItemsLaboratorio();
         selected = new Items();
+
     }
 
-    public void buttonActionEditar(ActionEvent actionEvent) {
-        refrescar = 0;
-        selected.setDescripcion(selected.getDescripcion().toUpperCase());
+    public void buttonActionEliminar(ActionEvent actionEvent) {
+        selected.setActivo(BigInteger.ZERO);
         edit(selected);
 
         list1 = reglasNegocio.getListaItemsLaboratorio();
         selected = new Items();
-    }
-    public void buttonActionNuevo(ActionEvent actionEvent) {
 
-        selected = new Items();
     }
-    public void buttonActionElim(ActionEvent actionEvent) {
-        selected.setActivo(BigInteger.ZERO);
+
+    public void buttonActionActualizar(ActionEvent actionEvent) {
+        refrescar = 0;
+        selected.setDescripcion(selected.getDescripcion().toUpperCase());
         edit(selected);
 
         list1 = reglasNegocio.getListaItemsLaboratorio();

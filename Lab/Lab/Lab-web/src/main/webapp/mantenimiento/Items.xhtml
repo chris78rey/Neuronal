@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../menu/menu.xhtml">
+
+            <ui:define name="body">
+                <div>TODO write content</div>
+
+
+                <h:form id="form1">
+                    <h1><h:outputText value="Create/Edit"/></h1>
+                    <p:panelGrid columns="2">
+
+                        <p:outputLabel value="Grupos" for="idfk" />
+
+                        <p:selectOneMenu id="idfk"   value="#{itemMB.selected.idfk}"  >
+                            <f:selectItem itemLabel="Select One" itemValue="" />
+                            <f:selectItems  value="#{itemMB.listaGruposExamenesImagenes}" var="registro" itemValue="#{registro.id}" itemLabel="#{registro.descripcion}" />
+                        </p:selectOneMenu>
+
+                        <p:outputLabel value="Descripcion:" for="descripcion" />
+                        <p:inputText size="100" id="descripcion" value="#{itemMB.selected.descripcion}" title="Descripcion" required="true" requiredMessage="The Descripcion field is required."/>
+                        <p:outputLabel value="SinDescuento:" for="sinDescuento" />
+                        <p:inputText size="100" id="sinDescuento" value="#{itemMB.selected.sinDescuento}" title="SinDescuento" />
+                        <p:outputLabel value="ConDescuento:" for="conDescuento" />
+                        <p:inputText size="100" id="conDescuento" value="#{itemMB.selected.conDescuento}" title="ConDescuento" />
+
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{itemMB.buttonActionNuevo(actionEvent)}" id="cbb1" update="form1 form2" value="Nuevo" />
+                    <p:commandButton actionListener="#{itemMB.buttonActionGrabar(actionEvent)}" id="cbb2" update="form1 form2" value="Grabar" />
+                    <p:commandButton actionListener="#{itemMB.buttonActionActualizar(actionEvent)}" id="cbb3" update="form1 form2" value="Actualizar Datos"/>
+                    <p:commandButton actionListener="#{itemMB.buttonActionEliminar(actionEvent)}" id="cbb4" update="form1 form2" value="Eliminar" />
+
+                </h:form>
+
+
+                <h:form id="form2">
+                    <h1><h:outputText value="List"/></h1>
+                    <p:dataTable value="#{itemMB.list1}" var="item"
+                                 selectionMode="single" 
+                                 selection="#{itemMB.selected}"
+                                 reflow="true"
+                                 paginator="true"
+                                 rowKey="#{item.id}"
+                                 rows="1500"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="form2 form1"/>
+                        <p:ajax event="rowUnselect" update="form2 form1"/>
+
+                        <p:column 
+                            filterBy="#{item.descripcion}" 
+                            filterMatchMode="contains"
+
+                            >
+                            <f:facet name="header">
+                                <h:outputText value="Jerarquia"/>
+                            </f:facet>
+                            <h:outputText value="#{item.jerarquia}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="SinDescuento"/>
+                            </f:facet>
+                            <h:outputText value="#{item.sinDescuento}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="ConDescuento"/>
+                            </f:facet>
+                            <h:outputText value="#{item.conDescuento}"/>
+                        </p:column>
+
+                    </p:dataTable>
+                </h:form>
+
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

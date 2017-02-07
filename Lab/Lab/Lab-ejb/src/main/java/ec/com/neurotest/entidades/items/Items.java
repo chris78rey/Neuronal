@@ -13,6 +13,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -51,6 +52,16 @@ public class Items implements Serializable {
     @Column(name = "IDFK")
     private BigDecimal idfk;
 
+    @Transient
+    private BigDecimal idempleado;
+
+    public BigDecimal getIdempleado() {
+        return idempleado;
+    }
+
+    public void setIdempleado(BigDecimal idempleado) {
+        this.idempleado = idempleado;
+    }
 
     public Items() {
     }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ec.com.neurotest.fachadas.empleado;
+package ec.com.neurotest.fachadas.listapacientes;
 
 import java.util.List;
 import javax.persistence.EntityManager;
