@@ -25,8 +25,10 @@ import javax.inject.Named;
 
 public class CierreReporteMB implements Serializable {
 
+    private static final long serialVersionUID = 5071176861162062259L;
+
     @EJB
-    private V00011cierreFacade v00011cierreFacade;
+    transient private V00011cierreFacade v00011cierreFacade;
     private List<V00011cierre> lcierre = new ArrayList<>();
 
     @PostConstruct

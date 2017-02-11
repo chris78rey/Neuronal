@@ -28,7 +28,9 @@ import javax.inject.Named;
  */
 @Named(value="listapacientesMB")
 @ViewScoped
-public class listapacientesMB implements Serializable {
+public class ListapacientesMB implements Serializable {
+
+    private static final long serialVersionUID = -7989179097949260870L;
 
     @EJB
     transient private SolicitudXItemFacade solicitudXItemFacade;
@@ -47,11 +49,11 @@ public class listapacientesMB implements Serializable {
     }
 
     /** Creates a new instance of listapacientesMB */
-    public listapacientesMB() {
+    public ListapacientesMB() {
         this.solicitudXItem = new SolicitudXItem();
         this.selected = new V00010listapacienteshoy();
     }
-    private static final Logger LOG = Logger.getLogger(listapacientesMB.class.getName());
+    private static final Logger LOG = Logger.getLogger(ListapacientesMB.class.getName());
 
     public void buttonAction(ActionEvent actionEvent) {
         try {

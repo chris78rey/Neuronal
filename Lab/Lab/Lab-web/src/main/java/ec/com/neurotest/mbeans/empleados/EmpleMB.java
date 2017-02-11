@@ -11,6 +11,7 @@ import ec.com.neurotest.negocio.mantenimiento.EmpleadoLocal;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.event.ActionEvent;
@@ -93,8 +94,9 @@ public class EmpleMB implements Serializable {
     }
 
     public void buttonActionGrabar(ActionEvent actionEvent) {
-        selected.setApellido(selected.getApellido().toUpperCase());
-        selected.setNombre(selected.getNombre().toUpperCase());
+
+        selected.setApellido(selected.getApellido().toUpperCase(Locale.US));
+        selected.setNombre(selected.getNombre().toUpperCase(Locale.US));
         empleado.create(selected);
         selected = new V00002empleado();
         listaDeEmpleados = findAll();
@@ -108,8 +110,8 @@ public class EmpleMB implements Serializable {
     }
 
     public void buttonActionActualizar(ActionEvent actionEvent) {
-        selected.setApellido(selected.getApellido().toUpperCase());
-        selected.setNombre(selected.getNombre().toUpperCase());
+        selected.setApellido(selected.getApellido().toUpperCase(Locale.US));
+        selected.setNombre(selected.getNombre().toUpperCase(Locale.US));
         empleado.edit(selected);
         selected = new V00002empleado();
         listaDeEmpleados = findAll();

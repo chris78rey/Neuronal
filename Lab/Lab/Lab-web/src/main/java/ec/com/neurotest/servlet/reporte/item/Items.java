@@ -34,7 +34,7 @@ import net.sf.jasperreports.engine.JasperReport;
 public class Items extends HttpServlet {
 
     @Resource(name = "labs")
-    private DataSource labs;
+    transient private DataSource labs;
 
     private static final long serialVersionUID = 7553228742568266908L;
 

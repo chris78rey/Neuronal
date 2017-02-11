@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ec.com.neurotest.fachadas;
+package ec.com.neurotest.fachadas.solicitudm;
 
 import ec.com.neurotest.entidades.seqmaxsolicitud.V00003seqmaxsolicitud;
+import ec.com.neurotest.fachadas.AbstractFacade;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

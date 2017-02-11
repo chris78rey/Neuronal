@@ -11,6 +11,7 @@ import ec.com.neurotest.fachadas.medicorefiere.V00001medicorefiereFacade;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.event.ActionEvent;
@@ -99,7 +100,7 @@ public class ReferidosMB implements Serializable {
 
     }
     public void buttonActionGrabar(ActionEvent actionEvent) {
-        selected.setApellido(selected.getApellido().toUpperCase());
+        selected.setApellido(selected.getApellido().toUpperCase(Locale.US));
         selected.setNombre(selected.getNombre().toUpperCase());
         selected.setCentromedico(selected.getCentromedico().toUpperCase());
         v00001medicorefiereFacade.create(selected);
@@ -116,7 +117,7 @@ public class ReferidosMB implements Serializable {
     }
 
     public void buttonActionActualizar(ActionEvent actionEvent) {
-        selected.setApellido(selected.getApellido().toUpperCase());
+        selected.setApellido(selected.getApellido().toUpperCase(Locale.US));
         selected.setNombre(selected.getNombre().toUpperCase());
         selected.setCentromedico(selected.getCentromedico().toUpperCase());
         v00001medicorefiereFacade.edit(selected);

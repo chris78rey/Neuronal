@@ -15,11 +15,11 @@ import ec.com.neurotest.entidades.seqmaxsolicitud.V00003seqmaxsolicitud;
 import ec.com.neurotest.entidades.solicitante.V00003personasolicitante;
 import ec.com.neurotest.entidades.solicitudmap.Solicitud;
 import ec.com.neurotest.entidades.solicxitem.SolicitudXItem;
-import ec.com.neurotest.fachadas.V00003seqmaxsolicitudFacade;
 import ec.com.neurotest.fachadas.cliente.ClienteFacade;
 import ec.com.neurotest.fachadas.empleadounido.V00001empleadosFacade;
 import ec.com.neurotest.fachadas.facturaview.V00004facturaFacade;
 import ec.com.neurotest.fachadas.medicorefiere.V00001medicorefiereFacade;
+import ec.com.neurotest.fachadas.solicitudm.V00003seqmaxsolicitudFacade;
 import ec.com.neurotest.fachadas.solicxitem.SolicitudXItemFacade;
 import ec.com.neurotest.negocio.mantenimiento.GrabaFactura;
 import ec.com.neurotest.negocio.mantenimiento.GuardaCabeceraSolicitud;
@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
@@ -195,12 +196,13 @@ public class Solicitudes implements Serializable {
 
     public void buttonActionGrabar(ActionEvent actionEvent) {
         try {
-            selected.setApellido(selected.getApellido().toUpperCase());
-            selected.setNombre(selected.getNombre().toUpperCase());
+            selected.setApellido(selected.getApellido().toUpperCase(Locale.US));
+            selected.setNombre(selected.getNombre().toUpperCase(Locale.US));
             solicitante.create(selected);
             listadelosquefacturan = findAll();
 
         } catch (Exception e) {
+            System.out.println("e = " + e.getLocalizedMessage());
         }
 
 
@@ -214,8 +216,8 @@ public class Solicitudes implements Serializable {
     }
 
     public void buttonActionActualizar(ActionEvent actionEvent) {
-        selected.setApellido(selected.getApellido().toUpperCase());
-        selected.setNombre(selected.getNombre().toUpperCase());
+        selected.setApellido(selected.getApellido().toUpperCase(Locale.US));
+        selected.setNombre(selected.getNombre().toUpperCase(Locale.US));
 
         solicitante.edit(selected);
         listadelosquefacturan = findAll();
@@ -293,7 +295,7 @@ public class Solicitudes implements Serializable {
     }
 
     public void EliminaseleccionActionPasaLista(ActionEvent actionEvent) {
-        boolean remove = listaitemsofertadosconcostoseleccion.remove(seleccionadoparaeliminar);
+        listaitemsofertadosconcostoseleccion.remove(seleccionadoparaeliminar);
     }
 
     /**
@@ -351,11 +353,10 @@ public class Solicitudes implements Serializable {
 
                 guardacabesolicitudmb.setDescuento(BigInteger.ZERO);
             }
-            Date fechaSolicitud = getGuardacabesolicitudmb().getFechaSolicitud();
+
             guardaCabeceraSolicitud.create(guardacabesolicitudmb);
             List<V00003seqmaxsolicitud> maximasol = v00003seqmaxsolicitudFacade.findAll();
             
-            BigDecimal id = guardacabesolicitudmb.getId();
             V00003seqmaxsolicitud next = null;
             Iterator<V00003seqmaxsolicitud> iterator = maximasol.iterator();
             while (iterator.hasNext()) {
@@ -457,11 +458,11 @@ public class Solicitudes implements Serializable {
 
                 guardacabesolicitudmb.setDescuento(BigInteger.ZERO);
             }
-            Date fechaSolicitud = getGuardacabesolicitudmb().getFechaSolicitud();
+//            Date fechaSolicitud = getGuardacabesolicitudmb().getFechaSolicitud();
             guardaCabeceraSolicitud.create(guardacabesolicitudmb);
             List<V00003seqmaxsolicitud> maximasol = v00003seqmaxsolicitudFacade.findAll();
 
-            BigDecimal id = guardacabesolicitudmb.getId();
+//            BigDecimal id = guardacabesolicitudmb.getId();
             V00003seqmaxsolicitud next = null;
             Iterator<V00003seqmaxsolicitud> iterator = maximasol.iterator();
             while (iterator.hasNext()) {
@@ -504,7 +505,7 @@ public class Solicitudes implements Serializable {
 
     }
     private static final Logger LOG = Logger.getLogger(Solicitudes.class.getName());
-    private Boolean inactibaguardar = new Boolean(false);
+    private Boolean inactibaguardar = false;
 
     /**
      * @return the inactibaguardar

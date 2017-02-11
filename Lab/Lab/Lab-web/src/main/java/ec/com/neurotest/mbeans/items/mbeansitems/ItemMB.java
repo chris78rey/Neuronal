@@ -11,6 +11,7 @@ import ec.com.neurotest.negocio.mantenimiento.ReglasNegocioLocal;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.List;
+import java.util.Locale;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.event.ActionEvent;
@@ -81,7 +82,7 @@ public class ItemMB implements Serializable {
 
     public void buttonActionGrabar(ActionEvent actionEvent) {
         refrescar = 0;
-        selected.setDescripcion(selected.getDescripcion().toUpperCase());
+        selected.setDescripcion(selected.getDescripcion().toUpperCase(Locale.US));
         create(selected);
 
         list1 = reglasNegocio.getListaItemsLaboratorio();
@@ -100,7 +101,7 @@ public class ItemMB implements Serializable {
 
     public void buttonActionActualizar(ActionEvent actionEvent) {
         refrescar = 0;
-        selected.setDescripcion(selected.getDescripcion().toUpperCase());
+        selected.setDescripcion(selected.getDescripcion().toUpperCase(Locale.US));
         edit(selected);
 
         list1 = reglasNegocio.getListaItemsLaboratorio();

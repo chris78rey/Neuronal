@@ -11,7 +11,9 @@
 
                 <f:view>
                     <h:form>
-                        <table border="1">
+                        <br/>
+                        <br/>
+                        <table style="table-layout: auto" border="1">
                             <thead>
                                 <tr>
                                     <th></th>
@@ -19,71 +21,78 @@
                                 </tr>
                             </thead>
                             <tbody>
+
                                 <tr>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td></td>
+
                                     <td>
                                         <p:selectOneMenu id="organizaciones"  value="#{itemsxorganizMB.seleccionOrganizacion}"  >
-                                            <f:selectItem itemLabel="Select One" itemValue="" noSelectionOption="true" />
+                                            <f:selectItem itemLabel="Select One" itemValue="-10"  />
                                             <f:selectItems  value="#{itemsxorganizMB.listOrganizacioncombo}"
                                                             var="registro"
                                                             itemLabel="#{registro.nombreOrg}"
                                                             itemValue="#{registro.idOrg}"
                                                             />
-                                            <f:ajax event="change" render="@form" listener="#{itemsxorganizMB.listen1(event)}"/>
+                                            <f:ajax event="change"  execute="@this" render="@form"  listener="#{itemsxorganizMB.listen1(event)}"/>
                                         </p:selectOneMenu>
+
+                                    </td>
+                                    <td>
+                                        <p:selectOneListbox  id="valor" filter="true"   
+                                                             value="#{itemsxorganizMB.valorSeleccionado}" 
+                                                             >
+                                            <f:selectItem itemLabel="Select One" itemValue="0" />
+                                            <f:selectItems  
+                                                value="#{itemsxorganizMB.listaSource}" 
+                                                var="registro"   itemLabel="#{registro.descripcion}" 
+                                                itemValue="#{registro.idIorg}"         
+                                                />
+
+                                            <f:ajax event="change" execute="@form" render="@form" />
+
+                                        </p:selectOneListbox>
+
+
+
+
+                                    </td>
+                                    <td>
+                                        <p:commandButton actionListener="#{itemsxorganizMB.buttonAction}" id="iconOnly" update="@form" process="@form" icon="ui-icon-disk" title="Icon Only" />
+
 
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
+                        <p:growl id="msg" showDetail="true" escape="false" />
 
 
                         <h1><h:outputText value="List"/></h1>
+                        <p:commandButton id="cb111" actionListener="#{itemsxorganizMB.buttonActionQuitar}" update="@form" value="Quitar"  />
 
-                        <p:commandButton actionListener="#{itemsxorganizMB.buttonAction(actionEvent)}" id="cbb1" update="@form" value="CAmbiar Estado" />
 
-                        <p:dataTable value="#{itemsxorganizMB.itemsXOrganizs}" var="item"
-
+                        <p:dataTable id="dt1" value="#{itemsxorganizMB.listadeactivosactivos}" 
+                                     var="item"
                                      selectionMode="single" 
                                      selection="#{itemsxorganizMB.selected}"
                                      reflow="true"
-
                                      rowKey="#{item.idIorg}"
-
                                      >
 
                             <p:ajax event="rowSelect"   update="@form"/>
-                            <p:ajax event="rowUnselect" update="@form"/>
 
-                            <p:column>
+
+                            <p:column  filterBy="#{item.descripcion}" 
+                                       filterMatchMode="contains"
+                                       >
                                 <f:facet name="header">
-                                    <h:outputText value="NombreOrg"/>
+                                    <h:outputText value="Descripcion"/>
                                 </f:facet>
-                                <h:outputText value="#{item.nombreOrg}"/>
-                            </p:column>
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Jerarquia"/>
-                                </f:facet>
-                                <h:outputText value="#{item.jerarquia}"/>
-                            </p:column>
-
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Activo"/>
-                                </f:facet>
-
-
-                                <p:selectOneMenu id="comboactivo" disabled="true" value="#{item.activo}"  >
-                                    <f:selectItem itemLabel="Activo" itemValue="1" />
-                                    <f:selectItem itemLabel="Inactivo" itemValue="0" />
-                                </p:selectOneMenu>
+                                <h:outputText value="#{item.descripcion}"/>
                             </p:column>
                         </p:dataTable>
+
+
+
                     </h:form>
                 </f:view>
 
