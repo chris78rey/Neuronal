@@ -31,14 +31,15 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Solicitud.findAll", query = "SELECT s FROM Solicitud s")})
 public class Solicitud implements Serializable {
 
-    private static final long serialVersionUID = 7249537469528530320L;
-
+    private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     @Basic(optional = false)
     @NotNull
     @Column(name = "ID")
     private BigDecimal id;
+    @Column(name = "ID_QUIEN_FACTURA")
+    private BigInteger idQuienFactura;
     @Basic(optional = false)
     @NotNull
     @Column(name = "ID_PACIENTE")
@@ -53,8 +54,6 @@ public class Solicitud implements Serializable {
     private Date fechaSolicitud;
     @Column(name = "ID_REFIERE")
     private BigInteger idRefiere;
-//    @Column(name = "ID_EMPLEADO")
-//    private BigInteger idempleado;
     @Basic(optional = false)
     @NotNull
     @Column(name = "DESCUENTO")
@@ -65,6 +64,7 @@ public class Solicitud implements Serializable {
     @Column(name = "SOLICITUD_ACTIVA")
     private BigInteger solicitudActiva;
 
+
     public Solicitud() {
     }
 
@@ -72,11 +72,12 @@ public class Solicitud implements Serializable {
         this.id = id;
     }
 
-    public Solicitud(BigDecimal id, BigInteger idPaciente, Date fechaSolicitud, BigInteger descuento) {
+    public Solicitud(BigDecimal id, BigInteger idPaciente, Date fechaSolicitud, BigInteger descuento, Date fechaCompleta) {
         this.id = id;
         this.idPaciente = idPaciente;
         this.fechaSolicitud = fechaSolicitud;
         this.descuento = descuento;
+
     }
 
     public BigDecimal getId() {
@@ -85,6 +86,14 @@ public class Solicitud implements Serializable {
 
     public void setId(BigDecimal id) {
         this.id = id;
+    }
+
+    public BigInteger getIdQuienFactura() {
+        return idQuienFactura;
+    }
+
+    public void setIdQuienFactura(BigInteger idQuienFactura) {
+        this.idQuienFactura = idQuienFactura;
     }
 
     public BigInteger getIdPaciente() {
@@ -143,6 +152,7 @@ public class Solicitud implements Serializable {
         this.solicitudActiva = solicitudActiva;
     }
 
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -165,7 +175,7 @@ public class Solicitud implements Serializable {
 
     @Override
     public String toString() {
-        return "ec.com.neurotest.entidades.items.Solicitud[ id=" + id + " ]";
+        return "ec.com.neurotest.entidades.solicitudmap.Solicitud[ id=" + id + " ]";
     }
 
 }

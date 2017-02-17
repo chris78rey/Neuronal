@@ -14,9 +14,24 @@
                 <div>TODO write content</div>
 
 
+
+
+
                 <h:form id="form1">
                     <h1><h:outputText value="Create/Edit"/></h1>
                     <p:panelGrid columns="2">
+                        <p:outputLabel value="Tipocolaborador:" for="tipocolaborador" />
+
+                        <p:selectOneMenu id="tipocolaborador"  value="#{empleMB.selected.tipocolaborador}"  >
+                            <f:selectItem itemLabel="MEDICO REFIERE" itemValue="MEDICO REFIERE" />
+                            <f:selectItem itemLabel="VISITADOR" itemValue="VISITADOR" />
+                            <f:selectItem itemLabel="EMPLEADO" itemValue="EMPLEADO" />
+
+                        </p:selectOneMenu>
+
+                        <p:outputLabel value="PorcentajeParticipa:" for="porcentajeParticipa" />
+                        <p:inputText id="porcentajeParticipa" value="#{empleMB.selected.porcentajeParticipa}" title="PorcentajeParticipa" />
+
                         <p:outputLabel value="Cc:" for="cc" />
                         <p:inputText id="cc" value="#{empleMB.selected.cc}" title="Cc" required="true" requiredMessage="The Cc field is required."/>
                         <p:outputLabel value="Nombre:" for="nombre" />
@@ -31,6 +46,7 @@
                         <p:inputText id="telefono" value="#{empleMB.selected.telefono}" title="Telefono" />
                         <p:outputLabel value="Celular:" for="celular" />
                         <p:inputText id="celular" value="#{empleMB.selected.celular}" title="Celular" />
+
                     </p:panelGrid>
                     <p:commandButton actionListener="#{empleMB.buttonActionNuevo(actionEvent)}" id="iconOnly3" update="form2 form1" value="Nuevo" />
                     <p:commandButton actionListener="#{empleMB.buttonActionGrabar(actionEvent)}" id="iconOnly" update="form2 form1" value="Grabar" />
@@ -53,13 +69,19 @@
                                  >
                         <p:ajax event="rowSelect"   update="form1"/>
                         <p:ajax event="rowUnselect" update="form1"/>
-
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="Idempleado"/>
+                                <h:outputText value="Tipo"/>
                             </f:facet>
-                            <h:outputText value="#{item.idempleado}"/>
+                            <h:outputText value="#{item.tipocolaborador}"/>
                         </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Porcenta"/>
+                            </f:facet>
+                            <h:outputText value="#{item.porcentajeParticipa}"/>
+                        </p:column>
+
                         <p:column  filterBy="#{item.cc}" 
                                    filterMatchMode="contains"
                                    >
@@ -108,6 +130,7 @@
                             </f:facet>
                             <h:outputText value="#{item.celular}"/>
                         </p:column>
+
 
                     </p:dataTable>
                 </h:form>

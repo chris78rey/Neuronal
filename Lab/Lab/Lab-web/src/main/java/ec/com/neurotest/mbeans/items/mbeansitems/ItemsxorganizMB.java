@@ -6,9 +6,11 @@
 package ec.com.neurotest.mbeans.items.mbeansitems;
 
 import ec.com.neurotest.entidades.items.activaitemsorganizacion.V000ItOrgSiActivos;
+import ec.com.neurotest.entidades.listaorgitems.V000ItOrgSiActivosdetalle;
 import ec.com.neurotest.entidades.organizacion.Organizacion;
 import ec.com.neurotest.fachadas.items.activaitemsorganizacion.V000ItOrgSiActivosFacade;
 import ec.com.neurotest.fachadas.itemsxorganiz.V000ItemsXOrganizFacade;
+import ec.com.neurotest.fachadas.listaorgitems.V000ItOrgSiActivosdetalleFacade;
 import ec.com.neurotest.fachadas.organizacion.OrganizacionFacade;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -39,17 +41,21 @@ import javax.inject.Named;
 @Named(value = "itemsxorganizMB")
 @ViewScoped
 public class ItemsxorganizMB implements Serializable {
+
+    @EJB
+    private V000ItOrgSiActivosdetalleFacade v000ItOrgSiActivosdetalleFacade;
+
     private String valorSeleccionado = "";
     @EJB
     private V000ItOrgSiActivosFacade v000ItOrgSiActivosFacade;
-    private V000ItOrgSiActivos selected = new V000ItOrgSiActivos();
+    private V000ItOrgSiActivosdetalle selected = new V000ItOrgSiActivosdetalle();
     private V000ItOrgSiActivos selectedlista;
 
     @EJB
     transient private V000ItemsXOrganizFacade v000ItemsXOrganizFacade;
     private List<V000ItOrgSiActivos> listaSource = new ArrayList<>();
     private List<V000ItOrgSiActivos> listaTarget = new ArrayList<>();
-    private List<V000ItOrgSiActivos> listadeactivosactivos;
+
 
     @EJB
     transient private OrganizacionFacade organizacionFacade;
@@ -57,6 +63,7 @@ public class ItemsxorganizMB implements Serializable {
     private static final long serialVersionUID = 3758564078568749687L;
     private BigDecimal seleccionOrganizacion = new BigDecimal(BigInteger.ZERO);
     private List<Organizacion> listOrganizacioncombo;
+    private List<V000ItOrgSiActivosdetalle> listadeactivosactivos;
 
     public ItemsxorganizMB() {
         this.selectedlista = new V000ItOrgSiActivos();
@@ -68,7 +75,7 @@ public class ItemsxorganizMB implements Serializable {
         listOrganizacioncombo = organizacionFacade.findAll();
         listaSource = getV000ItOrgSiActivosFacade().findItemsActivosByOrganizacionNoActivos(BigInteger.ZERO);
         int size = listaSource.size();
-        setListadeactivosactivos(getV000ItOrgSiActivosFacade().findItemsActivosByOrganizacionActivos(BigInteger.ZERO));
+        setListadeactivosactivos(v000ItOrgSiActivosdetalleFacade.findItemsActivopororganizacion(BigInteger.ZERO));
     }
     /**
      * @return the seleccionOrganizacion
@@ -101,7 +108,8 @@ public class ItemsxorganizMB implements Serializable {
 
         setListaSource(getV000ItOrgSiActivosFacade().findItemsActivosByOrganizacionNoActivos(seleccionOrganizacion.toBigInteger()));
 
-        setListadeactivosactivos(getV000ItOrgSiActivosFacade().findItemsActivosByOrganizacionActivos(seleccionOrganizacion.toBigInteger()));
+        String toString = seleccionOrganizacion.toString();
+        listadeactivosactivos = v000ItOrgSiActivosdetalleFacade.findItemsActivopororganizacion(new BigInteger(toString));
 
 
     }
@@ -124,7 +132,7 @@ public class ItemsxorganizMB implements Serializable {
         setListaSource(getV000ItOrgSiActivosFacade().findItemsActivosByOrganizacionNoActivos(seleccionOrganizacion.toBigInteger()));
 
 
-        setListadeactivosactivos(getV000ItOrgSiActivosFacade().findItemsActivosByOrganizacionActivos(seleccionOrganizacion.toBigInteger()));
+        setListadeactivosactivos(v000ItOrgSiActivosdetalleFacade.findItemsActivopororganizacion(seleccionOrganizacion.toBigInteger()));
     }
 
     /**
@@ -158,38 +166,33 @@ public class ItemsxorganizMB implements Serializable {
     /**
      * @return the selected
      */
-    public V000ItOrgSiActivos getSelected() {
+    public V000ItOrgSiActivosdetalle getSelected() {
         return selected;
     }
 
     /**
      * @param selected the selected to set
      */
-    public void setSelected(V000ItOrgSiActivos selected) {
+    public void setSelected(V000ItOrgSiActivosdetalle selected) {
         this.selected = selected;
     }
 
     /**
      * @return the listadeactivosactivos
      */
-    public List<V000ItOrgSiActivos> getListadeactivosactivos() {
-        return listadeactivosactivos;
-    }
 
     /**
      * @param listadeactivosactivos the listadeactivosactivos to set
      */
-    public void setListadeactivosactivos(List<V000ItOrgSiActivos> listadeactivosactivos) {
-        this.listadeactivosactivos = listadeactivosactivos;
-    }
     public void buttonActionQuitar(ActionEvent actionEvent) {
         try {
             addMessage("Elemento Eliminado!");
             selected.setActivo(BigInteger.ZERO);
-            getV000ItOrgSiActivosFacade().edit(selected);
+            v000ItOrgSiActivosdetalleFacade.edit(selected);
+
 
             setListaSource(getV000ItOrgSiActivosFacade().findItemsActivosByOrganizacionNoActivos(seleccionOrganizacion.toBigInteger()));
-            setListadeactivosactivos(getV000ItOrgSiActivosFacade().findItemsActivosByOrganizacionActivos(seleccionOrganizacion.toBigInteger()));
+            setListadeactivosactivos(v000ItOrgSiActivosdetalleFacade.findItemsActivopororganizacion(seleccionOrganizacion.toBigInteger()));
 
         } catch (Exception e) {
         }
@@ -224,6 +227,23 @@ public class ItemsxorganizMB implements Serializable {
         this.selectedlista = selectedlista;
     }
 
+    /**
+     * @return the listadeactivosactivos
+     */
+    public List<V000ItOrgSiActivosdetalle> getListadeactivosactivos() {
+        return listadeactivosactivos;
+    }
+
+    /**
+     * @param listadeactivosactivos the listadeactivosactivos to set
+     */
+    public void setListadeactivosactivos(List<V000ItOrgSiActivosdetalle> listadeactivosactivos) {
+        this.listadeactivosactivos = listadeactivosactivos;
+    }
+
+    /**
+     * @return the listadeactivosactivos
+     */
     @FacesConverter(forClass = V000ItOrgSiActivos.class)
     public static class Converter1 implements Converter {
 

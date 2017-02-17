@@ -62,7 +62,15 @@ public class V00002empleado implements Serializable {
     @Column(name = "CELULAR")
     private String celular;
 
+    @Column(name = "PORCENTAJE_PARTICIOA")
+    private BigDecimal porcentajeParticipa;
+
+    @Column(name = "TIPO_COLABORADOR")
+    private String tipocolaborador;
+
+
     public V00002empleado() {
+        this.porcentajeParticipa = new BigDecimal("0");
     }
 
     public String getCc() {
@@ -127,6 +135,34 @@ public class V00002empleado implements Serializable {
 
     public void setIdempleado(BigDecimal idempleado) {
         this.idempleado = idempleado;
+    }
+
+    /**
+     * @return the porcentajeParticipa
+     */
+    public BigDecimal getPorcentajeParticipa() {
+        return porcentajeParticipa;
+    }
+
+    /**
+     * @param porcentajeParticipa the porcentajeParticipa to set
+     */
+    public void setPorcentajeParticipa(BigDecimal porcentajeParticipa) {
+        this.porcentajeParticipa = porcentajeParticipa;
+    }
+
+    /**
+     * @return the tipocolaborador
+     */
+    public String getTipocolaborador() {
+        return tipocolaborador;
+    }
+
+    /**
+     * @param tipocolaborador the tipocolaborador to set
+     */
+    public void setTipocolaborador(String tipocolaborador) {
+        this.tipocolaborador = tipocolaborador;
     }
 
 }

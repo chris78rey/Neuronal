@@ -1,0 +1,304 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <body>
+        <ui:composition template="./../menu/menu.xhtml">
+            <ui:define name="body">
+
+
+
+                <h:form>
+
+
+
+                    <p:panel id="horizontal" header="Proforma" toggleable="true" toggleOrientation="horizontal">
+                        <h:panelGrid columns="12" cellpadding="10">
+
+                            <h1><h:outputText value="List"/></h1>
+
+                            <p:selectOneListbox 
+                                id="selecccion" 
+                                filter="true"   
+                                value="#{proformaMB.selected}"
+                                filterMatchMode="contains"
+                                >
+                                <f:selectItem itemLabel="Select One" itemValue="" />
+                                <f:selectItems  value="#{proformaMB.lproforma}" var="registro" itemValue="#{registro}" itemLabel="#{registro.descripcion}" />
+
+                            </p:selectOneListbox>
+                            <p:commandButton 
+                                actionListener="#{proformaMB.buttonActionAgregItemProforma(actionEvent)}" 
+                                id="agregai" 
+                                update="@form" 
+                                value="Agregar"/>
+
+                            <p:commandButton 
+                                actionListener="#{proformaMB.buttonActionLimpiar(actionEvent)}" 
+                                id="limpiar" 
+                                update="@form" 
+                                value="Eliminar Registro"
+
+                                />
+
+
+
+                            <h1><h:outputText value="List"/></h1>
+                            <p:dataTable 
+                                value="#{proformaMB.lprofdeta}" 
+                                var="item"
+                                selectionMode="single" 
+                                selection="#{proformaMB.seleccionproforma}"
+                                reflow="true"
+                                paginator="true"
+                                rowKey="#{item.idIorg}"
+
+                                >
+
+                                <p:ajax event="rowSelect"   update="@form"/>
+                                <p:ajax event="rowUnselect" update="@form"/>
+
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="NombreOrg"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.nombreOrg}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Descripcion"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.descripcion}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="SinDescuento"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.sinDescuento}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="ConDescuento"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.conDescuento}"/>
+                                </p:column>
+                                <p:columnGroup type="footer">
+                                    <p:row>
+                                        <p:column colspan="2" style="text-align:right" footerText="Totals:" />
+                                        <p:column footerText="$#{proformaMB.sindescuento}" />
+
+                                        <p:column footerText="$#{proformaMB.condescuento}" />
+                                    </p:row>
+                                </p:columnGroup>
+
+                            </p:dataTable>
+
+
+
+
+
+                        </h:panelGrid>
+                    </p:panel>
+                </h:form>
+                <h:form id="nf514djc">
+                    <p:growl id="msgs" showDetail="true" />
+                    <p:panel id="clientes"  rendered="#{proformaMB.controlclientespagayatendido}" header="Clientes" toggleable="true" toggleOrientation="horizontal">
+                        <h:panelGrid columns="155" >
+                            <h1><h:outputText value="Create/Edit"/></h1>
+                            <p:panelGrid columns="2">
+                                <p:outputLabel value="Cc:" for="cc" />
+                                <p:inputText id="cc" value="#{proformaMB.agregarcliente.cc}" title="Cc" required="true" requiredMessage="The Cc field is required."/>
+                                <p:outputLabel value="Nombre:" for="nombre" />
+                                <p:inputText id="nombre" value="#{proformaMB.agregarcliente.nombre}" title="Nombre" required="true" requiredMessage="The Nombre field is required."/>
+                                <p:outputLabel value="Apellido:" for="apellido" />
+                                <p:inputText id="apellido" value="#{proformaMB.agregarcliente.apellido}" title="Apellido" required="true" requiredMessage="The Apellido field is required."/>
+                                <p:outputLabel value="CorreoElectronico:" for="correoElectronico" />
+                                <p:inputText id="correoElectronico" value="#{proformaMB.agregarcliente.correoElectronico}" title="CorreoElectronico" />
+                                <p:outputLabel value="Direccion:" for="direccion" />
+                                <p:inputText id="direccion" value="#{proformaMB.agregarcliente.direccion}" title="Direccion" />
+                                <p:outputLabel value="Telefono:" for="telefono" />
+                                <p:inputText id="telefono" value="#{proformaMB.agregarcliente.telefono}" title="Telefono" />
+                                <p:outputLabel value="Celular:" for="celular" />
+                                <p:inputText id="celular" value="#{proformaMB.agregarcliente.celular}" title="Celular" />
+
+                                <p:panelGrid columns="2">
+                                    <p:commandButton actionListener="#{proformaMB.buttonActionNuevoCliente(actionEvent)}" 
+                                                     id="iconOnly2" update="@form" 
+                                                     value="Nuevo"/>
+
+                                    <p:commandButton actionListener="#{proformaMB.buttonActionagregarCliente(actionEvent)}" 
+                                                     id="iconOnly" update="@form" 
+                                                     value="Agregar"/>
+
+
+
+                                </p:panelGrid>
+
+                            </p:panelGrid>
+                            <h1><h:outputText value="List"/></h1>
+
+
+
+                            <p:dataTable 
+                                value="#{proformaMB.personasolicitante}" 
+                                var="item"
+                                selectionMode="single" 
+                                selection="#{proformaMB.personapaga}"
+                                reflow="true"
+                                paginator="true"
+                                rowKey="#{item.id}"
+                                rows="10"
+                                rowsPerPageTemplate="10,20,30,40,50"
+                                >
+
+                                <p:ajax event="rowSelect" listener="#{proformaMB.onRowSelect}"  update="@form f44"/>
+                                <p:ajax event="rowUnselect" listener="#{proformaMB.onRowUnselect}" update="@form f44"/>
+
+                                <p:column     
+                                    filterBy="#{item.cc}" 
+                                    filterMatchMode="contains"
+
+                                    >
+
+                                    <f:facet name="header">
+                                        <h:outputText value="Cc"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.cc}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Nombre"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.nombre}"/>
+                                </p:column>
+                                <p:column 
+                                    filterBy="#{item.apellido}" 
+                                    filterMatchMode="contains"
+
+                                    >
+                                    <f:facet name="header">
+                                        <h:outputText value="Apellido"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.apellido}"/>
+                                </p:column>
+
+                            </p:dataTable>
+
+
+
+
+                            <h1><h:outputText value="List"/></h1>
+
+                            <p:dataTable 
+                                value="#{proformaMB.personasolicitante}" 
+                                var="item"
+                                selectionMode="single" 
+                                selection="#{proformaMB.personaatendida}"
+                                reflow="true"
+                                paginator="true"
+                                rowKey="#{item.id}"
+                                rows="10"
+                                rowsPerPageTemplate="10,20,30,40,50"
+                                >
+
+
+                                <p:ajax event="rowSelect" listener="#{proformaMB.onRowSelect1(event)}"  update="@form f44"/>
+                                <p:ajax event="rowUnselect" listener="#{proformaMB.onRowUnselect1(event)}" update="@form f44"/>
+
+                                <p:column     
+                                    filterBy="#{item.cc}" 
+                                    filterMatchMode="contains"
+
+                                    >
+                                    <f:facet name="header">
+                                        <h:outputText value="Cc"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.cc}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Nombre"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.nombre}"/>
+                                </p:column>
+                                <p:column 
+                                    filterBy="#{item.apellido}" 
+                                    filterMatchMode="contains"
+
+                                    >
+                                    <f:facet name="header">
+                                        <h:outputText value="Apellido"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.apellido}"/>
+                                </p:column>
+
+                            </p:dataTable>
+
+
+
+
+
+
+
+                        </h:panelGrid>
+                    </p:panel>
+
+                </h:form>
+                <h:form id="f44">
+                    <p:growl id="msgs" showDetail="true" />
+
+
+
+
+                    <p:panel  rendered="#{proformaMB.solicitud.idQuienFactura ne null  and proformaMB.solicitud.idPaciente ne null  }" id="solic" header="Solicitud" toggleable="true" toggleOrientation="horizontal">
+                        <h:panelGrid  columns="12" cellpadding="10">
+
+
+
+                            <h1><h:outputText value="Create/Edit"/></h1>
+                            <p:panelGrid columns="2">
+
+                                <p:outputLabel value="Numero Secuencial:"  />
+                                <p:outputLabel value="#{proformaMB.solicitud.id}"  />
+
+
+                                <p:outputLabel value="FechaSolicitud:" for="fechaSolicitud" />
+
+                                <p:calendar id="fechaSolicitud" disabled="#{proformaMB.controlbotonsolicitud}" value="#{proformaMB.solicitud.fechaSolicitud}" showOn="button" />
+                                <p:outputLabel value="Descuento:" for="descuento" />
+
+                                <p:selectOneMenu disabled="#{proformaMB.controlbotonsolicitud}"
+                                                 id="descuento"  
+                                                 value="#{proformaMB.solicitud.descuento}"  
+                                                 filter="true"
+                                                 filterMatchMode="contains"
+                                                 >
+                                    <f:selectItem   itemLabel="SIN DESCUENTO" itemValue="0" />
+                                    <f:selectItem itemLabel="CON DESCUENTO" itemValue="1" />
+
+                                    <f:ajax event="change" execute="@this" render="@this" listener="#{proformaMB.listen1Descuento(event)}"/>
+                                </p:selectOneMenu>
+
+
+
+                            </p:panelGrid>
+
+                            <p:commandButton 
+                                actionListener="#{proformaMB.buttonActionGuardaSolicitud}" 
+                                id="iconOnly" 
+                                update="@form nf514djc" 
+                                value="Guargar"
+                                disabled="#{proformaMB.controlbotonsolicitud}"
+                                />
+
+                        </h:panelGrid>
+                    </p:panel>
+                </h:form>
+
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

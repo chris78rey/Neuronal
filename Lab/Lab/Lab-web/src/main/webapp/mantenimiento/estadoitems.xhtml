@@ -37,8 +37,11 @@
 
                                     </td>
                                     <td>
-                                        <p:selectOneListbox  id="valor" filter="true"   
+                                        <p:selectOneListbox  id="valor" 
+                                                             filter="true"
+                                                             filterMatchMode="contains"
                                                              value="#{itemsxorganizMB.valorSeleccionado}" 
+                                                             style="width: 100%"
                                                              >
                                             <f:selectItem itemLabel="Select One" itemValue="0" />
                                             <f:selectItems  
