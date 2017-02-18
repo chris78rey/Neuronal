@@ -45,14 +45,14 @@ public class SolicitudXItem implements Serializable {
     private double idSolicitud;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "ID_ITEM")
-    private BigInteger idItem;
+    @Column(name = "ID_IORG")
+    private BigInteger idIorg;
     @Basic(optional = false)
     @NotNull
     @Column(name = "DESCUENTO")
     private BigInteger descuento;
-    @Column(name = "ID_REFIERE")
-    private BigInteger idRefiere;
+//    @Column(name = "ID_REFIERE")
+//    private BigInteger idRefiere;
     @Column(name = "FECHA_REGISTRO")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaRegistro;
@@ -69,14 +69,11 @@ public class SolicitudXItem implements Serializable {
     private Double montoIva;
     @Column(name = "TOTAL_EN_FACTURA")
     private Double totalEnFactura;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "PORC_PARTICIPA")
-    private double porcParticipa;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "PARTICIPACION_REFIERE")
-    private double participacionRefiere;
+
+//    @Basic(optional = false)
+//    @NotNull
+//    @Column(name = "PARTICIPACION_REFIERE")
+//    private double participacionRefiere;
     @Column(name = "LIQUIDO_RECIBE_LABORATORIO")
     private Double liquidoRecibeLaboratorio;
     @Size(max = 400)
@@ -97,10 +94,9 @@ public class SolicitudXItem implements Serializable {
     public SolicitudXItem(BigDecimal id, double idSolicitud, BigInteger idItem, BigInteger descuento, double porcParticipa, double participacionRefiere) {
         this.id = id;
         this.idSolicitud = idSolicitud;
-        this.idItem = idItem;
         this.descuento = descuento;
-        this.porcParticipa = porcParticipa;
-        this.participacionRefiere = participacionRefiere;
+//        this.porcParticipa = porcParticipa;
+//        this.participacionRefiere = participacionRefiere;
     }
 
     public BigDecimal getId() {
@@ -119,28 +115,12 @@ public class SolicitudXItem implements Serializable {
         this.idSolicitud = idSolicitud;
     }
 
-    public BigInteger getIdItem() {
-        return idItem;
-    }
-
-    public void setIdItem(BigInteger idItem) {
-        this.idItem = idItem;
-    }
-
     public BigInteger getDescuento() {
         return descuento;
     }
 
     public void setDescuento(BigInteger descuento) {
         this.descuento = descuento;
-    }
-
-    public BigInteger getIdRefiere() {
-        return idRefiere;
-    }
-
-    public void setIdRefiere(BigInteger idRefiere) {
-        this.idRefiere = idRefiere;
     }
 
     public Date getFechaRegistro() {
@@ -199,21 +179,21 @@ public class SolicitudXItem implements Serializable {
         this.totalEnFactura = totalEnFactura;
     }
 
-    public double getPorcParticipa() {
-        return porcParticipa;
-    }
+//    public double getPorcParticipa() {
+//        return porcParticipa;
+//    }
+//
+//    public void setPorcParticipa(double porcParticipa) {
+//        this.porcParticipa = porcParticipa;
+//    }
 
-    public void setPorcParticipa(double porcParticipa) {
-        this.porcParticipa = porcParticipa;
-    }
-
-    public double getParticipacionRefiere() {
-        return participacionRefiere;
-    }
-
-    public void setParticipacionRefiere(double participacionRefiere) {
-        this.participacionRefiere = participacionRefiere;
-    }
+//    public double getParticipacionRefiere() {
+//        return participacionRefiere;
+//    }
+//
+//    public void setParticipacionRefiere(double participacionRefiere) {
+//        this.participacionRefiere = participacionRefiere;
+//    }
 
     public Double getLiquidoRecibeLaboratorio() {
         return liquidoRecibeLaboratorio;
@@ -270,6 +250,20 @@ public class SolicitudXItem implements Serializable {
     @Override
     public String toString() {
         return "ec.com.neurotest.entidades.solicxitem.SolicitudXItem[ id=" + id + " ]";
+    }
+
+    /**
+     * @return the idIorg
+     */
+    public BigInteger getIdIorg() {
+        return idIorg;
+    }
+
+    /**
+     * @param idIorg the idIorg to set
+     */
+    public void setIdIorg(BigInteger idIorg) {
+        this.idIorg = idIorg;
     }
 
 }

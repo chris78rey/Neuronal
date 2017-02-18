@@ -6,6 +6,7 @@
 package ec.com.neurotest.entidades.proformas;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -14,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -57,15 +59,20 @@ public class V00005proforma implements Serializable {
     private Double sinDescuento;
     @Column(name = "CON_DESCUENTO")
     private Double conDescuento;
+    @Transient
+    private BigDecimal personaqueatiendealpaciente;
 
     public V00005proforma() {
+        this.personaqueatiendealpaciente = new BigDecimal("-1");
     }
 
     public V00005proforma(BigInteger id) {
+        this.personaqueatiendealpaciente = new BigDecimal("-1");
         this.id = id;
     }
 
     public V00005proforma(BigInteger id, String descripcion) {
+        this.personaqueatiendealpaciente = new BigDecimal("-1");
         this.id = id;
         this.descripcion = descripcion;
     }
@@ -149,6 +156,20 @@ public class V00005proforma implements Serializable {
     @Override
     public String toString() {
         return "ec.com.neurotest.entidades.proformas.V00005proforma[ id=" + id + " ]";
+    }
+
+    /**
+     * @return the personaqueatiendealpaciente
+     */
+    public BigDecimal getPersonaqueatiendealpaciente() {
+        return personaqueatiendealpaciente;
+    }
+
+    /**
+     * @param personaqueatiendealpaciente the personaqueatiendealpaciente to set
+     */
+    public void setPersonaqueatiendealpaciente(BigDecimal personaqueatiendealpaciente) {
+        this.personaqueatiendealpaciente = personaqueatiendealpaciente;
     }
 
 }

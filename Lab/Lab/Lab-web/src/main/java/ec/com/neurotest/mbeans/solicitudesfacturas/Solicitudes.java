@@ -343,7 +343,7 @@ public class Solicitudes implements Serializable {
         try {
 
             guardacabesolicitudmb.setIdPaciente(new BigInteger(selected.getId().toString()));
-            guardacabesolicitudmb.setIdRefiere(selectedMedicoRefiereO.getId());
+//            guardacabesolicitudmb.setIdRefiere(selectedMedicoRefiereO.getId());
             guardacabesolicitudmb.setSolicitudActiva(BigInteger.ONE);
 
             if (valorswitch == true) {
@@ -384,7 +384,7 @@ public class Solicitudes implements Serializable {
                         System.out.println("e = " + e.getLocalizedMessage());
                     }
 
-                    detallefactura.setIdItem(next1.getId().toBigInteger());
+//                    detallefactura.setIdItem(next1.getId().toBigInteger());
                     detallefactura.setCantidad(BigInteger.ONE);
                     detallefactura.setFechaRegistro(new Date());
                     detallefactura.setPacienteRevisado(BigInteger.ZERO);
@@ -396,7 +396,7 @@ public class Solicitudes implements Serializable {
 
                         detallefactura.setDescuento(BigInteger.ZERO);
                     }
-                    detallefactura.setIdRefiere(selectedMedicoRefiereO.getId());
+//                    detallefactura.setIdRefiere(selectedMedicoRefiereO.getId());
                     solicitudXItemFacade.create(detallefactura);
                     inactibaguardar = true;
                     listafacturaconsumasdetalle = v00004facturaFacade.findbyNumeroSoliFactura(idsolici);
@@ -448,7 +448,7 @@ public class Solicitudes implements Serializable {
 
 
             guardacabesolicitudmb.setIdPaciente(new BigInteger(selected.getId().toString()));
-            guardacabesolicitudmb.setIdRefiere(selectedMedicoRefiereO.getId());
+//            guardacabesolicitudmb.setIdRefiere(selectedMedicoRefiereO.getId());
             guardacabesolicitudmb.setSolicitudActiva(BigInteger.ONE);
 
             if (valorswitch == true) {
@@ -484,7 +484,7 @@ public class Solicitudes implements Serializable {
                 Items next1 = iterator1.next();
 
                 detallefactura.setIdSolicitud(idsolici.doubleValue());
-                detallefactura.setIdItem(next1.getId().toBigInteger());
+//                detallefactura.setIdItem(next1.getId().toBigInteger());
 
                 if (valorswitch == true) {
                     detallefactura.setDescuento(BigInteger.ONE);
@@ -493,7 +493,7 @@ public class Solicitudes implements Serializable {
 
                     detallefactura.setDescuento(BigInteger.ZERO);
                 }
-                detallefactura.setIdRefiere(selectedMedicoRefiereO.getId());
+//                detallefactura.setIdRefiere(selectedMedicoRefiereO.getId());
                 solicitudXItemFacade.create(detallefactura);
 
             }

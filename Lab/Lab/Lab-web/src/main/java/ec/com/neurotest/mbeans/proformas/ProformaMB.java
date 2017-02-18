@@ -6,14 +6,20 @@
 
 package ec.com.neurotest.mbeans.proformas;
 
+import ec.com.neurotest.entidades.empleado.V00002empleado;
 import ec.com.neurotest.entidades.proformas.V00005proforma;
 import ec.com.neurotest.entidades.seqmaxsolicitud.V00003seqmaxsolicitud;
 import ec.com.neurotest.entidades.solicitante.V00003personasolicitante;
 import ec.com.neurotest.entidades.solicitudmap.Solicitud;
+import ec.com.neurotest.entidades.solicitudrefiere.Solicitudrefiere;
+import ec.com.neurotest.entidades.solicxitem.SolicitudXItem;
+import ec.com.neurotest.fachadas.empleado.V00002empleadoFacade;
 import ec.com.neurotest.fachadas.proformas.V00005proformaFacade;
 import ec.com.neurotest.fachadas.solicitante.V00003personasolicitanteFacade;
 import ec.com.neurotest.fachadas.solicitudm.V00003seqmaxsolicitudFacade;
 import ec.com.neurotest.fachadas.solicitudmap.SolicitudFacade;
+import ec.com.neurotest.fachadas.solicitudrefiere.SolicitudrefiereFacade;
+import ec.com.neurotest.fachadas.solicxitem.SolicitudXItemFacade;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -45,7 +51,18 @@ import org.primefaces.event.UnselectEvent;
 public class ProformaMB implements Serializable {
 
     @EJB
-    private V00003seqmaxsolicitudFacade v00003seqmaxsolicitudFacade;
+    transient private SolicitudXItemFacade solicitudXItemFacade;
+
+    @EJB
+    transient private SolicitudrefiereFacade solicitudrefiereFacade;
+    private List<Solicitudrefiere> listarefierequeseregistraenproforma;
+
+    @EJB
+    transient private V00002empleadoFacade v00002empleadoFacade;
+    private List<V00002empleado> listadeempleadosqueatienden = new ArrayList<>();
+    private List<V00002empleado> listadeempleadosqueatiendentodos = new ArrayList<>();
+    @EJB
+    transient private V00003seqmaxsolicitudFacade v00003seqmaxsolicitudFacade;
 
     @EJB
     transient private SolicitudFacade solicitudFacade;
@@ -58,6 +75,8 @@ public class ProformaMB implements Serializable {
 
 
 
+
+
     public List<V00005proforma> findModuloPorNombre(BigInteger par) {
         return v00005proformaFacade.findModuloPorNombre(par);
     }
@@ -66,7 +85,7 @@ public class ProformaMB implements Serializable {
         return v00005proformaFacade.findAll();
     }
 
-    public V00005proforma find(BigInteger id) {
+    public V00005proforma find(BigInteger id) throws Exception {
         V00005proforma find = v00005proformaFacade.find(id);
         return find;
     }
@@ -74,9 +93,17 @@ public class ProformaMB implements Serializable {
 
     @PostConstruct
     private void init() {
-        setLproforma(findAll());
-        personasolicitante = v00003personasolicitanteFacade.findAll();
+        try {
 
+            setLproforma(findAll());
+            personasolicitante = v00003personasolicitanteFacade.findAll();
+//            listadeempleadosqueatienden = v00002empleadoFacade.findAll();
+            listadeempleadosqueatienden = v00002empleadoFacade.findReferenteconUtilidad();
+            listadeempleadosqueatiendentodos = v00002empleadoFacade.findAll();
+            listarefierequeseregistraenproforma = new ArrayList<>();
+
+        } catch (Exception e) {
+        }
     }
     private List<V00005proforma> lproforma;
 
@@ -86,6 +113,9 @@ public class ProformaMB implements Serializable {
      * Creates a new instance of ProformaMB
      */
     public ProformaMB() {
+        this.listarefierequeseregistraenproforma = new ArrayList<Solicitudrefiere>();
+        this.condescuento = new Double("0");
+        this.sindescuento = new Double("0");
         this.agregarcliente = new V00003personasolicitante();
         this.personaatendida = new V00003personasolicitante();
         this.personapaga = new V00003personasolicitante();
@@ -157,8 +187,8 @@ public class ProformaMB implements Serializable {
         }
     }
 
-    private Double sindescuento = new Double("0");
-    private Double condescuento = new Double("0");
+    private Double sindescuento;
+    private Double condescuento;
 
     private List<V00005proforma> lprofdeta = new ArrayList<>();
 
@@ -179,7 +209,7 @@ public class ProformaMB implements Serializable {
     /**
      * @return the sindescuento
      */
-    public Double getSindescuento() {
+    public Double getSindescuento() throws Exception {
         Iterator<V00005proforma> iterator = lprofdeta.iterator();
         double valor = 0;
         while (iterator.hasNext()) {
@@ -347,13 +377,22 @@ public class ProformaMB implements Serializable {
 
         } catch (Exception e) {
         }
-        FacesMessage msg = new FacesMessage("El que paga es:", personapaga.getApellido() + " " + personapaga.getNombre());
-        FacesContext.getCurrentInstance().addMessage(null, msg);
+        try {
+            FacesMessage msg = new FacesMessage("El que paga es:", personapaga.getApellido() + " " + personapaga.getNombre());
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+
+        } catch (Exception e) {
+        }
     }
 
     public void onRowUnselect(UnselectEvent event) {
-        FacesMessage msg = new FacesMessage("", "");
-        FacesContext.getCurrentInstance().addMessage(null, msg);
+        try {
+
+            FacesMessage msg = new FacesMessage("", "");
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+
+        } catch (Exception e) {
+        }
     }
 
     public void onRowSelect1(SelectEvent event) {
@@ -369,13 +408,23 @@ public class ProformaMB implements Serializable {
             v00003personasolicitanteFacade.create(personaatendida);
         } catch (Exception e) {
         }
-        FacesMessage msg = new FacesMessage("El paciente es:", personaatendida.getApellido() + " " + personaatendida.getNombre());
-        FacesContext.getCurrentInstance().addMessage(null, msg);
+        try {
+
+            FacesMessage msg = new FacesMessage("El paciente es:", personaatendida.getApellido() + " " + personaatendida.getNombre());
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+
+        } catch (Exception e) {
+        }
     }
 
     public void onRowUnselect1(UnselectEvent event) {
-        FacesMessage msg = new FacesMessage("", "");
-        FacesContext.getCurrentInstance().addMessage(null, msg);
+        try {
+
+            FacesMessage msg = new FacesMessage("", "");
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+
+        } catch (Exception e) {
+        }
     }
 
     private BigInteger bicondescuento = new BigInteger("0");
@@ -435,7 +484,7 @@ public class ProformaMB implements Serializable {
 
             findmaxsolicitud = v00003seqmaxsolicitudFacade.findAll();
 
-            setIdsolici(new BigInteger("-1"));
+            setIdsolici(null);
 
             for (V00003seqmaxsolicitud v00003seqmaxsolicitud : findmaxsolicitud) {
                 setIdsolici(v00003seqmaxsolicitud.getIdsolici());
@@ -505,6 +554,160 @@ public class ProformaMB implements Serializable {
      */
     public void setControlclientespagayatendido(Boolean controlclientespagayatendido) {
         this.controlclientespagayatendido = controlclientespagayatendido;
+    }
+
+    /**
+     * @return the listadeempleadosqueatienden
+     */
+    public List<V00002empleado> getListadeempleadosqueatienden() {
+        return listadeempleadosqueatienden;
+    }
+
+    /**
+     * @param listadeempleadosqueatienden the listadeempleadosqueatienden to set
+     */
+    public void setListadeempleadosqueatienden(List<V00002empleado> listadeempleadosqueatienden) {
+        this.listadeempleadosqueatienden = listadeempleadosqueatienden;
+    }
+
+    private BigDecimal personaquerefiereelexamen = new BigDecimal("-1");
+
+    /**
+     * @return the personaquerefiereelexamen
+     */
+    public BigDecimal getPersonaquerefiereelexamen() {
+        return personaquerefiereelexamen;
+    }
+
+    /**
+     * @param personaquerefiereelexamen the personaquerefiereelexamen to set
+     */
+    public void setPersonaquerefiereelexamen(BigDecimal personaquerefiereelexamen) {
+        this.personaquerefiereelexamen = personaquerefiereelexamen;
+    }
+
+    public void buttonActionAgregarReferente(ActionEvent actionEvent) {
+        try {
+
+            Solicitudrefiere s = new Solicitudrefiere();
+            s.setIdColXExam(new BigDecimal("-1"));
+            s.setIdEmpleado(personaquerefiereelexamen.toBigInteger());
+            s.setIdSolicitud(solicitud.getId().toBigInteger());
+            listarefierequeseregistraenproforma.add(s);
+
+        } catch (Exception e) {
+            System.out.println("e = " + e.getLocalizedMessage());
+        }
+    }
+    public void buttonActionLimpiarReferente(ActionEvent actionEvent) {
+        try {
+
+            listarefierequeseregistraenproforma.clear();
+
+        } catch (Exception e) {
+            System.out.println("e = " + e.getLocalizedMessage());
+        }
+    }
+
+    /**
+     * @return the listarefierequeseregistraenproforma
+     */
+    public List<Solicitudrefiere> getListarefierequeseregistraenproforma() {
+        return listarefierequeseregistraenproforma;
+    }
+
+    /**
+     * @param listarefierequeseregistraenproforma the
+     * listarefierequeseregistraenproforma to set
+     */
+    public void setListarefierequeseregistraenproforma(List<Solicitudrefiere> listarefierequeseregistraenproforma) {
+        this.listarefierequeseregistraenproforma = listarefierequeseregistraenproforma;
+    }
+    private Solicitudrefiere selecsrefiere = new Solicitudrefiere();
+    public void onRowSelect44(SelectEvent event) throws Exception {
+        FacesMessage msg = new FacesMessage("Se eliminará el registro del referente", "");
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+        listarefierequeseregistraenproforma.remove(selecsrefiere);
+    }
+
+    /**
+     * @return the selecsrefiere
+     */
+    public Solicitudrefiere getSelecsrefiere() {
+        return selecsrefiere;
+    }
+
+    /**
+     * @param selecsrefiere the selecsrefiere to set
+     */
+    public void setSelecsrefiere(Solicitudrefiere selecsrefiere) {
+        this.selecsrefiere = selecsrefiere;
+    }
+
+    /**
+     * @return the listadeempleadosqueatiendentodos
+     */
+    public List<V00002empleado> getListadeempleadosqueatiendentodos() {
+        return listadeempleadosqueatiendentodos;
+    }
+
+    /**
+     * @param listadeempleadosqueatiendentodos the
+     * listadeempleadosqueatiendentodos to set
+     */
+    public void setListadeempleadosqueatiendentodos(List<V00002empleado> listadeempleadosqueatiendentodos) {
+        this.listadeempleadosqueatiendentodos = listadeempleadosqueatiendentodos;
+    }
+    public void listen1c(AjaxBehaviorEvent event) {
+
+    }
+
+    public void buttonActionGrabaTodo(ActionEvent actionEvent) {
+
+        Iterator<Solicitudrefiere> solirefiiterator = listarefierequeseregistraenproforma.iterator();
+        while (solirefiiterator.hasNext()) {
+            try {
+                Solicitudrefiere next = solirefiiterator.next();
+                next.setValorDeudaAlQueRefiere(new Double("0"));
+                solicitudrefiereFacade.create(next);
+
+            } catch (Exception e) {
+            }
+
+        }
+        Iterator<V00005proforma> iterator = lprofdeta.iterator();
+        while (iterator.hasNext()) {
+            try {
+                SolicitudXItem item = new SolicitudXItem();
+
+                V00005proforma next = iterator.next();
+                item.setIdSolicitud(solicitud.getId().doubleValue());
+                item.setIdIorg(next.getIdIorg());
+                item.setDescuento(solicitud.getDescuento());
+                item.setPacienteRevisado(new BigInteger("0"));
+                BigInteger menosuno = null;
+                try {
+                    menosuno = next.getPersonaqueatiendealpaciente().toBigInteger();
+                    if (menosuno.equals(new BigInteger("-1"))) {
+                        menosuno = null;
+                    }
+                } catch (Exception e) {
+                    menosuno = null;
+                }
+
+                item.setIdEmpleado(menosuno);
+                solicitudXItemFacade.create(item);
+
+            } catch (Exception e) {
+                FacesMessage msg = new FacesMessage("Estado", "No se guardo ");
+                FacesContext.getCurrentInstance().addMessage(null, msg);
+            }
+
+        }
+        FacesMessage msg = new FacesMessage("Estado", "Registros agregados");
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+
+
     }
 
     @FacesConverter(forClass = V00005proforma.class)

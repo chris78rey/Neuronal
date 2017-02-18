@@ -52,8 +52,8 @@ public class Solicitud implements Serializable {
     @Column(name = "FECHA_SOLICITUD")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaSolicitud;
-    @Column(name = "ID_REFIERE")
-    private BigInteger idRefiere;
+//    @Column(name = "ID_REFIERE")
+//    private BigInteger idRefiere;
     @Basic(optional = false)
     @NotNull
     @Column(name = "DESCUENTO")
@@ -120,13 +120,13 @@ public class Solicitud implements Serializable {
         this.fechaSolicitud = fechaSolicitud;
     }
 
-    public BigInteger getIdRefiere() {
-        return idRefiere;
-    }
-
-    public void setIdRefiere(BigInteger idRefiere) {
-        this.idRefiere = idRefiere;
-    }
+//    public BigInteger getIdRefiere() {
+//        return idRefiere;
+//    }
+//
+//    public void setIdRefiere(BigInteger idRefiere) {
+//        this.idRefiere = idRefiere;
+//    }
 
     public BigInteger getDescuento() {
         return descuento;
