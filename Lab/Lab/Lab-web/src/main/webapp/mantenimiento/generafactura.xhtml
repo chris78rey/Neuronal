@@ -26,7 +26,7 @@
                             cellpadding="10"
                             >
 
-                            <h1><h:outputText value="List"/></h1>
+
                             <p:dataTable 
                                 value="#{generaFacturaMB.listaGeneraFactura}" 
                                 var="item"
@@ -45,13 +45,32 @@
                                     update="@form msgs"
                                     />
 
+                                <p:column
+                                    filterBy="#{item.nombreOrg}" 
+                                    filterMatchMode="contains"
+
+                                    >
+                                    <f:facet name="header">
+                                        <h:outputText value="NombreOrg"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.nombreOrg}"/>
+                                </p:column>
+
 
                                 <p:column>
                                     <f:facet name="header">
                                         <h:outputText value="FechaSolicitud"/>
                                     </f:facet>
                                     <h:outputText value="#{item.fechaSolicitud}">
-                                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                                    </h:outputText>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="nofact"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.nofact}">
+
                                     </h:outputText>
                                 </p:column>
                                 <p:column  
@@ -80,22 +99,7 @@
                                     </f:facet>
                                     <h:outputText value="#{item.apellPaga}"/>
                                 </p:column>
-                                <p:column
-                                    filterBy="#{item.nombreOrg}" 
-                                    filterMatchMode="contains"
 
-                                    >
-                                    <f:facet name="header">
-                                        <h:outputText value="NombreOrg"/>
-                                    </f:facet>
-                                    <h:outputText value="#{item.nombreOrg}"/>
-                                </p:column>
-                                <p:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="IdOrg"/>
-                                    </f:facet>
-                                    <h:outputText value="#{item.idOrg}"/>
-                                </p:column>
                                 <p:column>
                                     <f:facet name="header">
                                         <h:outputText value="Idsolic"/>

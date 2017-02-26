@@ -83,6 +83,9 @@ public class V001GeneraFactura implements Serializable {
     @Column(name = "APELLIDO_PACIENTE")
     private String apellidoPaciente;
 
+    @Column(name = "NUMERO_FACTURA")
+    private String nofact;
+
     public V001GeneraFactura() {
     }
 
@@ -172,6 +175,20 @@ public class V001GeneraFactura implements Serializable {
 
     public void setApellidoPaciente(String apellidoPaciente) {
         this.apellidoPaciente = apellidoPaciente;
+    }
+
+    /**
+     * @return the nofact
+     */
+    public String getNofact() {
+        return nofact;
+    }
+
+    /**
+     * @param nofact the nofact to set
+     */
+    public void setNofact(String nofact) {
+        this.nofact = nofact;
     }
 
 }
