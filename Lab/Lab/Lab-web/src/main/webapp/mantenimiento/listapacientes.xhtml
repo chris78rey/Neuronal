@@ -8,10 +8,65 @@
     <body>
         <ui:composition template="./../menu/menu.xhtml">
             <ui:define name="body">
+                <p:growl 
+                    id="msgs" 
+                    showDetail="true" 
+                    />  
+
 
                 <h:form>
+                    <p:panel 
+                        id="horizontal" 
+                        header="Personal Atiende" 
+                        toggleable="true" 
+                        toggleOrientation="horizontal"
+                        >
+
+                        <h:panelGrid 
+                            columns="12" 
+                            cellpadding="10"
+                            >
+                            <p:selectOneMenu 
+                                id="ispersonal"  
+                                value="#{listapacientesMB.idempleadoseleccionado}"  
+                                filter="true"
+                                filterMatchMode="contains"
+                                style="width: 450px"
+                                >
+                                <f:selectItem 
+                                    itemLabel="Select One" 
+                                    noSelectionOption="true" 
+                                    />
+                                <f:selectItems  
+                                    value="#{listapacientesMB.listadeempleadosqueatiendentodos}" 
+                                    var="registro"
+                                    itemValue="#{registro.idempleado}"
+                                    itemLabel="#{registro.apellido} #{registro.nombre}"
+                                    />
+
+                                <f:ajax 
+                                    event="change" 
+                                    listener="#{listapacientesMB.listen1(event)}"
+                                    />
+                            </p:selectOneMenu>
+                            <p:commandButton 
+                                actionListener="#{listapacientesMB.buttonActionSeleccionaAtiende(actionEvent)}" 
+                                id="cb1" 
+                                update="@form msgs md154unhd" 
+                                value="Selecciona quien Atiende"
+                                />
+
+
+
+                        </h:panelGrid>
+                    </p:panel>
+                </h:form>
+
+
+                <h:form id="md154unhd">
                     <h1><h:outputText value="List"/></h1>
-                    <p:dataTable value="#{listapacientesMB.listapacientes}" var="item"
+                    <p:dataTable value="#{listapacientesMB.listapacientes}" 
+                                 var="item"
 
                                  id="dt1"
                                  selectionMode="single" 
@@ -28,12 +83,7 @@
                         <p:ajax event="rowUnselect" process="@this"  update="@form"/>
 
 
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Nombre"/>
-                            </f:facet>
-                            <h:outputText value="#{item.nombre}"/>
-                        </p:column>
+
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="Item"/>

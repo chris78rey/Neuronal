@@ -86,7 +86,7 @@ public class GeneraFacturaMB implements Serializable {
 
         }
 
-        FacesMessage msg = new FacesMessage("Item Seleccionado", "");
+        FacesMessage msg = new FacesMessage("Item Seleccionado", "" + registroSeleccionado.getNofact());
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 

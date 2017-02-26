@@ -56,17 +56,27 @@ public class FacturaPorLaboratorioSolicitud extends HttpServlet {
         ServletContext servletContext = request.getSession().getServletContext();
         HttpSession session = request.getSession();
 
+        response.setContentType("text/html;charset=UTF-8");
+        HashMap hashMap = new HashMap();
+        //aca se coloca los parámetros del reporte
         try {
             registroSeleccionado = (V001GeneraFactura) session.getAttribute("registroSeleccionado");
 
         } catch (Exception e) {
+            hashMap.put("p1_org", "0");
+            hashMap.put("p2_soli", "0");
+
         }
 
-        response.setContentType("text/html;charset=UTF-8");
-        HashMap hashMap = new HashMap();
-        //aca se coloca los parámetros del reporte
-        hashMap.put("p1_org", registroSeleccionado.getIdOrg().toString());
-        hashMap.put("p2_soli", registroSeleccionado.getIdsolic().toString());
+        try {
+            hashMap.put("p1_org", registroSeleccionado.getIdOrg().toString());
+            hashMap.put("p2_soli", registroSeleccionado.getIdsolic().toString());
+
+        } catch (Exception e) {
+            hashMap.put("p1_org", "0");
+            hashMap.put("p2_soli", "0");
+
+        }
 
         Connection connection = null;
         byte[] bytes = null;
@@ -96,6 +106,13 @@ public class FacturaPorLaboratorioSolicitud extends HttpServlet {
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, hashMap, connection);
             //se almacena la impresión en un arreglo de bytes    
             bytes = JasperExportManager.exportReportToPdf(jasperPrint);
+
+            try {
+                session.removeAttribute("registroSeleccionado");
+
+            } catch (Exception e) {
+            }
+
         } catch (JRException | SQLException e) {
             System.out.println("e = " + e.getLocalizedMessage());
 
