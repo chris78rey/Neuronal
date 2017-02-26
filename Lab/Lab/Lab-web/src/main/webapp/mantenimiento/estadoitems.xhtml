@@ -25,7 +25,11 @@
                                 <tr>
 
                                     <td>
-                                        <p:selectOneMenu id="organizaciones"  value="#{itemsxorganizMB.seleccionOrganizacion}"  >
+                                        <p:selectOneMenu 
+                                            id="organizaciones"  
+                                            value="#{itemsxorganizMB.seleccionOrganizacion}" 
+                                            style="width: 100px"
+                                            >
                                             <f:selectItem itemLabel="Select One" itemValue="-10"  />
                                             <f:selectItems  value="#{itemsxorganizMB.listOrganizacioncombo}"
                                                             var="registro"
@@ -41,7 +45,7 @@
                                                              filter="true"
                                                              filterMatchMode="contains"
                                                              value="#{itemsxorganizMB.valorSeleccionado}" 
-                                                             style="width: 100%"
+                                                             style="width: 450px"
                                                              >
                                             <f:selectItem itemLabel="Select One" itemValue="0" />
                                             <f:selectItems  

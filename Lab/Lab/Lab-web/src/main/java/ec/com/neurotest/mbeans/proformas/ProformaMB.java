@@ -7,6 +7,7 @@
 package ec.com.neurotest.mbeans.proformas;
 
 import ec.com.neurotest.entidades.empleado.V00002empleado;
+import ec.com.neurotest.entidades.facturaingreso.V001Facturaingreso;
 import ec.com.neurotest.entidades.proformas.V00005proforma;
 import ec.com.neurotest.entidades.seqmaxsolicitud.V00003seqmaxsolicitud;
 import ec.com.neurotest.entidades.solicitante.V00003personasolicitante;
@@ -14,6 +15,7 @@ import ec.com.neurotest.entidades.solicitudmap.Solicitud;
 import ec.com.neurotest.entidades.solicitudrefiere.Solicitudrefiere;
 import ec.com.neurotest.entidades.solicxitem.SolicitudXItem;
 import ec.com.neurotest.fachadas.empleado.V00002empleadoFacade;
+import ec.com.neurotest.fachadas.facturaingreso.V001FacturaingresoFacade;
 import ec.com.neurotest.fachadas.proformas.V00005proformaFacade;
 import ec.com.neurotest.fachadas.solicitante.V00003personasolicitanteFacade;
 import ec.com.neurotest.fachadas.solicitudm.V00003seqmaxsolicitudFacade;
@@ -49,6 +51,9 @@ import org.primefaces.event.UnselectEvent;
 @Named(value="proformaMB")
 @ViewScoped
 public class ProformaMB implements Serializable {
+
+    @EJB
+    private V001FacturaingresoFacade v001FacturaingresoFacade;
 
     @EJB
     transient private SolicitudXItemFacade solicitudXItemFacade;
@@ -91,10 +96,13 @@ public class ProformaMB implements Serializable {
     }
     private V00005proforma seleccionproforma = new V00005proforma();
 
+    private List<V001Facturaingreso> findCabecerasBysolicitudes;
+    private V001Facturaingreso cabeceradelafacturaitem;
     @PostConstruct
     private void init() {
         try {
 
+            setFindCabecerasBysolicitudes(v001FacturaingresoFacade.findCabecerasBysolicitudes("0"));
             setLproforma(findAll());
             personasolicitante = v00003personasolicitanteFacade.findAll();
 //            listadeempleadosqueatienden = v00002empleadoFacade.findAll();
@@ -113,6 +121,8 @@ public class ProformaMB implements Serializable {
      * Creates a new instance of ProformaMB
      */
     public ProformaMB() {
+        this.cabeceradelafacturaitem = new V001Facturaingreso();
+        this.findCabecerasBysolicitudes = new ArrayList<>();
         this.listarefierequeseregistraenproforma = new ArrayList<Solicitudrefiere>();
         this.condescuento = new Double("0");
         this.sindescuento = new Double("0");
@@ -698,15 +708,81 @@ public class ProformaMB implements Serializable {
                 item.setIdEmpleado(menosuno);
                 solicitudXItemFacade.create(item);
 
+                botonguardardefinitivo = true;
+
             } catch (Exception e) {
                 FacesMessage msg = new FacesMessage("Estado", "No se guardo ");
                 FacesContext.getCurrentInstance().addMessage(null, msg);
             }
 
         }
+        try {
+            crearcabeceraycacularreferencias(solicitud.getId().toString());
+            findCabecerasBysolicitudes = v001FacturaingresoFacade.findCabecerasBysolicitudes(solicitud.getId().toString());
+        } catch (Exception e) {
+        }
         FacesMessage msg = new FacesMessage("Estado", "Registros agregados");
         FacesContext.getCurrentInstance().addMessage(null, msg);
 
+
+    }
+
+    private boolean botonguardardefinitivo = false;
+
+    /**
+     * @return the botonguardardefinitivo
+     */
+    public boolean isBotonguardardefinitivo() {
+        return botonguardardefinitivo;
+    }
+
+    /**
+     * @param botonguardardefinitivo the botonguardardefinitivo to set
+     */
+    public void setBotonguardardefinitivo(boolean botonguardardefinitivo) {
+        this.botonguardardefinitivo = botonguardardefinitivo;
+    }
+
+    public void crearcabeceraycacularreferencias(String pnumerosolicitud) {
+        v00005proformaFacade.crearcabeceraycacularreferencias(pnumerosolicitud);
+    }
+
+    /**
+     * @return the findCabecerasBysolicitudes
+     */
+    public List<V001Facturaingreso> getFindCabecerasBysolicitudes() {
+        return findCabecerasBysolicitudes;
+    }
+
+    /**
+     * @param findCabecerasBysolicitudes the findCabecerasBysolicitudes to set
+     */
+    public void setFindCabecerasBysolicitudes(List<V001Facturaingreso> findCabecerasBysolicitudes) {
+        this.findCabecerasBysolicitudes = findCabecerasBysolicitudes;
+    }
+
+    /**
+     * @return the cabeceradelafacturaitem
+     */
+    public V001Facturaingreso getCabeceradelafacturaitem() {
+        return cabeceradelafacturaitem;
+    }
+
+    /**
+     * @param cabeceradelafacturaitem the cabeceradelafacturaitem to set
+     */
+    public void setCabeceradelafacturaitem(V001Facturaingreso cabeceradelafacturaitem) {
+        this.cabeceradelafacturaitem = cabeceradelafacturaitem;
+    }
+
+    public void onRowSelectFijaNumeroFactura(SelectEvent event) {
+        try {
+            cabeceradelafacturaitem.setNumeroFactura(cabeceradelafacturaitem.getNumeroFactura().toUpperCase());
+            v001FacturaingresoFacade.edit(cabeceradelafacturaitem);
+            FacesMessage msg = new FacesMessage("Se actualizò la factura", "" + cabeceradelafacturaitem.getNumeroFactura());
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+        } catch (Exception e) {
+        }
 
     }
 
@@ -719,7 +795,6 @@ public class ProformaMB implements Serializable {
             this.v00005proforma = new V00005proforma();
         }        
 
-        
         @Override
         public Object getAsObject(FacesContext context, UIComponent component, String value) {
             String valor = value;
@@ -749,6 +824,6 @@ public class ProformaMB implements Serializable {
             return (id != null) ? String.valueOf(id) : "-20";
             
         }
-        
+
     }
 }

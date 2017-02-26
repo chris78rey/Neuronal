@@ -18,33 +18,37 @@
                     <p:panel id="horizontal" header="Proforma" toggleable="true" toggleOrientation="horizontal">
                         <h:panelGrid columns="12" cellpadding="10">
 
-                            <h1><h:outputText value="List"/></h1>
+                            <h:panelGrid columns="3">
 
-                            <p:selectOneListbox 
-                                id="selecccion" 
-                                filter="true"   
-                                value="#{proformaMB.selected}"
-                                filterMatchMode="contains"
-                                >
-                                <f:selectItem itemLabel="Select One" itemValue="" />
-                                <f:selectItems  value="#{proformaMB.lproforma}" var="registro" itemValue="#{registro}" itemLabel="#{registro.descripcion}" />
+                                <p:selectOneListbox 
+                                    id="selecccion" 
+                                    filter="true"   
+                                    value="#{proformaMB.selected}"
+                                    filterMatchMode="contains"
+                                    style="width: 450px"
+                                    styleClass="width: 100%"
+                                    >
+                                    <f:selectItem itemLabel="Select One" itemValue="" />
+                                    <f:selectItems  value="#{proformaMB.lproforma}" var="registro" itemValue="#{registro}" itemLabel="#{registro.descripcion}" />
 
-                            </p:selectOneListbox>
-                            <p:commandButton 
-                                actionListener="#{proformaMB.buttonActionAgregItemProforma(actionEvent)}" 
-                                id="agregai" 
-                                update="@form" 
-                                value="Agregar"/>
+                                </p:selectOneListbox>
+                                <p:commandButton 
+                                    actionListener="#{proformaMB.buttonActionAgregItemProforma(actionEvent)}" 
+                                    id="agregai" 
+                                    disabled="#{proformaMB.botonguardardefinitivo}"
+                                    update="@form" 
+                                    value="Agregar"/>
 
-                            <p:commandButton 
-                                actionListener="#{proformaMB.buttonActionLimpiar(actionEvent)}" 
-                                id="limpiar" 
-                                update="@form" 
-                                value="Eliminar Registro"
+                                <p:commandButton 
+                                    actionListener="#{proformaMB.buttonActionLimpiar(actionEvent)}" 
+                                    id="limpiar" 
+                                    update="@form" 
+                                    disabled="#{proformaMB.botonguardardefinitivo}"
+                                    value="Eliminar Registro"
 
-                                />
+                                    />
 
-
+                            </h:panelGrid>
 
                             <h1><h:outputText value="List"/></h1>
                             <p:dataTable 
@@ -373,76 +377,79 @@
 
                         </h:panelGrid>
                     </p:panel>
-                    <h:form id="mdnumdl87h">
-                        <p:growl id="msgs" showDetail="true" />
-                        <p:panel id="quienrefiere" header="Quién Refiere" toggleable="true" toggleOrientation="horizontal">
-                            <h:panelGrid columns="10" cellpadding="10">
-                                <h:outputText value="Persona que refiere:"/>
-                                <p:selectOneMenu 
-                                    id="sone0002"  
-                                    value="#{proformaMB.personaquerefiereelexamen}"  
-                                    filter="true"
-                                    filterMatchMode="contains"
-                                    >
-                                    <f:selectItems  
-                                        value="#{proformaMB.listadeempleadosqueatienden}" 
-                                        var="registro" 
-                                        itemValue="#{registro.idempleado}"
-                                        itemLabel="#{registro.apellido} #{registro.nombre}"
-                                        />
+                </h:form>
 
-                                </p:selectOneMenu>
-                                <p:commandButton 
-                                    actionListener="#{proformaMB.buttonActionAgregarReferente}" 
-                                    id="agregalistareferentes" 
-                                    process="@form"
-                                    update="tnbdlls" 
-                                    value="Agregar"
+                <h:form id="mdnumdl87h">
+                    <p:growl id="msgs" showDetail="true" />
+                    <p:panel id="quienrefiere" header="Quién Refiere" toggleable="true" toggleOrientation="horizontal">
+                        <h:panelGrid columns="10" cellpadding="10">
+                            <h:outputText value="Persona que refiere:"/>
+                            <p:selectOneMenu 
+                                id="sone0002"  
+                                value="#{proformaMB.personaquerefiereelexamen}"  
+                                filter="true"
+                                filterMatchMode="contains"
+                                >
+                                <f:selectItems  
+                                    value="#{proformaMB.listadeempleadosqueatienden}" 
+                                    var="registro" 
+                                    itemValue="#{registro.idempleado}"
+                                    itemLabel="#{registro.apellido} #{registro.nombre}"
                                     />
 
-
-                                <p:dataTable 
-                                    id="tnbdlls"
-                                    value="#{proformaMB.listarefierequeseregistraenproforma}" 
-                                    var="item"
-                                    >
-
-                                    <p:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="IdEmpleado"/>
-                                        </f:facet>
-
-                                        <p:selectOneMenu 
-                                            id="sone00023"  
-                                            value="#{item.idEmpleado}"  
-                                            filter="true"
-                                            filterMatchMode="contains"
-                                            disabled="true"
-                                            >
-
-                                            <f:selectItems  
-                                                value="#{proformaMB.listadeempleadosqueatienden}" 
-                                                var="registro" 
-                                                itemValue="#{registro.idempleado}"
-                                                itemLabel="#{registro.apellido} #{registro.nombre}"
-                                                />
-
-                                        </p:selectOneMenu>
-
-                                    </p:column>
-                                </p:dataTable>
-                                <p:commandButton 
-                                    actionListener="#{proformaMB.buttonActionLimpiarReferente}" 
-                                    id="limpiarref" 
-                                    process="@form"
-                                    update="tnbdlls" 
-                                    value="Limpiar"
-                                    />
+                            </p:selectOneMenu>
+                            <p:commandButton 
+                                actionListener="#{proformaMB.buttonActionAgregarReferente}" 
+                                id="agregalistareferentes" 
+                                process="@form"
+                                update="tnbdlls" 
+                                value="Agregar"
+                                disabled="#{proformaMB.botonguardardefinitivo}"
+                                />
 
 
-                            </h:panelGrid>
-                        </p:panel>
-                    </h:form>
+                            <p:dataTable 
+                                id="tnbdlls"
+                                value="#{proformaMB.listarefierequeseregistraenproforma}" 
+                                var="item"
+                                >
+
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="IdEmpleado"/>
+                                    </f:facet>
+
+                                    <p:selectOneMenu 
+                                        id="sone00023"  
+                                        value="#{item.idEmpleado}"  
+                                        filter="true"
+                                        filterMatchMode="contains"
+
+                                        >
+
+                                        <f:selectItems  
+                                            value="#{proformaMB.listadeempleadosqueatienden}" 
+                                            var="registro" 
+                                            itemValue="#{registro.idempleado}"
+                                            itemLabel="#{registro.apellido} #{registro.nombre}"
+                                            />
+
+                                    </p:selectOneMenu>
+
+                                </p:column>
+                            </p:dataTable>
+                            <p:commandButton 
+                                actionListener="#{proformaMB.buttonActionLimpiarReferente}" 
+                                id="limpiarref" 
+                                process="@form"
+                                update="tnbdlls" 
+                                value="Limpiar"
+                                disabled="#{proformaMB.botonguardardefinitivo}"
+                                />
+
+
+                        </h:panelGrid>
+                    </p:panel>
                 </h:form>
                 <h:form id="kfmjsh22">
                     <p:growl id="msgs" showDetail="true" />                    
@@ -452,9 +459,40 @@
                             <p:commandButton 
                                 actionListener="#{proformaMB.buttonActionGrabaTodo}" 
                                 id="Grabatransacción" 
-                                update="@form" 
+                                disabled="#{proformaMB.botonguardardefinitivo}"
+                                update="@form MDOJSNHG1 mdnumdl87h" 
                                 value="Guargar"
                                 />
+
+
+
+                            <h1><h:outputText value="Fijar factura"/></h1>
+                            <p:dataTable value="#{proformaMB.findCabecerasBysolicitudes}" 
+                                         var="item"
+                                         selectionMode="single" 
+                                         selection="#{proformaMB.cabeceradelafacturaitem}"
+                                         reflow="true"
+                                         paginator="false"
+                                         rowKey="#{item.idCabeceraFact}"
+                                         >
+                                <p:ajax event="rowSelect" listener="#{proformaMB.onRowSelectFijaNumeroFactura}"  update="@form"/>
+
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="NombreOrg"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.nombreOrg}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="NumeroFactura"/>
+                                    </f:facet>
+                                    <h:inputText value="#{item.numeroFactura}"/>
+                                </p:column>
+
+                            </p:dataTable>
+
+
                         </h:panelGrid>
                     </p:panel>
                 </h:form>

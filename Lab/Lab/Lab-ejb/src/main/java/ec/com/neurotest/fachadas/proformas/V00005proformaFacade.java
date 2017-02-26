@@ -12,7 +12,9 @@ import java.math.BigInteger;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.ParameterMode;
 import javax.persistence.PersistenceContext;
+import javax.persistence.StoredProcedureQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -45,4 +47,21 @@ public class V00005proformaFacade extends AbstractFacade<V00005proforma> {
         return resultList;
     }
 
+    /**
+     *
+     * @param pnumerosolicitud
+     */
+    public void crearcabeceraycacularreferencias(String pnumerosolicitud) {
+        try {
+            StoredProcedureQuery storedProcedure = em.createStoredProcedureQuery("P_CALCULA_FACTURAS");
+// set parameters
+            storedProcedure.registerStoredProcedureParameter("p_numerosolicitud", String.class, ParameterMode.IN);
+            storedProcedure.setParameter("p_numerosolicitud", pnumerosolicitud);
+// execute SP
+            storedProcedure.execute();
+
+        } catch (Exception e) {
+        }
+
+    }
 }
