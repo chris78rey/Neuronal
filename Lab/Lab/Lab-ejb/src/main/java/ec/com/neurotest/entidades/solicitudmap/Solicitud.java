@@ -61,6 +61,7 @@ public class Solicitud implements Serializable {
     @Size(max = 400)
     @Column(name = "OBSERVACION")
     private String observacion;
+    @NotNull
     @Column(name = "SOLICITUD_ACTIVA")
     private BigInteger solicitudActiva;
 

@@ -364,6 +364,14 @@ public class ProformaMB implements Serializable {
 
     }
 
+    public void onRowSelectCambiaAManoValoresCosto(SelectEvent event) {
+
+
+
+        FacesMessage msg = new FacesMessage("", "");
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+
     public void buttonActionNuevoCliente(ActionEvent actionEvent) {
         try {
             agregarcliente = new V00003personasolicitante();
@@ -490,6 +498,7 @@ public class ProformaMB implements Serializable {
     private Boolean controlclientespagayatendido = new Boolean(true);
     public void buttonActionGuardaSolicitud(ActionEvent actionEvent) {
         try {
+            solicitud.setSolicitudActiva(new BigInteger("1"));
             solicitudFacade.create(solicitud);
 
             findmaxsolicitud = v00003seqmaxsolicitudFacade.findAll();

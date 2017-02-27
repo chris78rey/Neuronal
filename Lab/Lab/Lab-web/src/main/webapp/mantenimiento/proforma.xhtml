@@ -313,9 +313,11 @@
                                 rowKey="#{item.idIorg}"
 
                                 >
-
-                                <p:ajax event="rowSelect"   update="@form MDOJSNHG1"/>
-                                <p:ajax event="rowUnselect" update="@form MDOJSNHG1"/>
+                                <p:ajax 
+                                    event="rowSelect" 
+                                    listener="#{proformaMB.onRowSelectCambiaAManoValoresCosto}"  
+                                    update="@form MDOJSNHG1"
+                                    />
 
                                 <p:column>
                                     <f:facet name="header">

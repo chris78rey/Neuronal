@@ -1,0 +1,221 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <body>
+        <ui:composition template="./../menu/menu.xhtml">
+            <ui:define name="body">
+                <h:form>
+                    <p:growl 
+                        id="msgs" 
+                        showDetail="true" 
+                        />  
+
+                    <p:panel 
+                        id="horizontal" 
+                        header="Reporte MEnsual de Ingresos" 
+                        toggleable="true" 
+                        toggleOrientation="horizontal"
+                        >
+
+                        <h:panelGrid 
+                            columns="12" 
+                            cellpadding="10"
+                            >
+
+                            <p:selectOneMenu 
+                                id="ida"  
+                                value="#{reporteutilidadmensualMB.anio}"  
+                                filter="true"
+                                filterMatchMode="contains"
+                                style="width: 60px"
+                                >
+                                <f:selectItem 
+                                    itemLabel="Select One" 
+                                    noSelectionOption="true" 
+                                    />
+                                <f:selectItem 
+                                    itemLabel="2017"
+                                    itemValue="2017"
+
+                                    />
+
+                                <f:selectItem 
+                                    itemLabel="2018"
+                                    itemValue="2018"
+
+                                    />
+
+                                <f:selectItem 
+                                    itemLabel="2019"
+                                    itemValue="2019"
+
+                                    />
+
+                                <f:selectItem 
+                                    itemLabel="2020"
+                                    itemValue="2020"
+
+                                    />
+
+                                <f:selectItem 
+                                    itemLabel="2021"
+                                    itemValue="2021"
+                                    />
+
+                            </p:selectOneMenu>
+
+                            <p:selectOneMenu 
+                                id="idm"  
+                                value="#{reporteutilidadmensualMB.mes}"  
+                                filter="true"
+                                filterMatchMode="contains"
+                                style="width: 60px"
+                                >
+
+                                <f:selectItem 
+                                    itemLabel="Select One" 
+                                    noSelectionOption="true" 
+                                    />
+                                <f:selectItem 
+                                    itemLabel="ENE"
+                                    itemValue="01"
+                                    />
+                                <f:selectItem 
+                                    itemLabel="FEB"
+                                    itemValue="02"
+                                    />
+                                <f:selectItem 
+                                    itemLabel="MAR"
+                                    itemValue="03"
+                                    />
+                                <f:selectItem 
+                                    itemLabel="ABR"
+                                    itemValue="04"
+                                    />
+                                <f:selectItem 
+                                    itemLabel="MAY"
+                                    itemValue="05"
+                                    />
+                                <f:selectItem 
+                                    itemLabel="JUN"
+                                    itemValue="06"
+                                    />
+                                <f:selectItem 
+                                    itemLabel="JUL"
+                                    itemValue="07"
+                                    />
+                                <f:selectItem 
+                                    itemLabel="AGOSTO"
+                                    itemValue="08"
+                                    />
+                                <f:selectItem 
+                                    itemLabel="SEPTIEMBRE"
+                                    itemValue="09"
+                                    />
+                                <f:selectItem 
+                                    itemLabel="OCT"
+                                    itemValue="10"
+                                    />
+                                <f:selectItem 
+                                    itemLabel="NOV"
+                                    itemValue="11"
+                                    />
+                                <f:selectItem 
+                                    itemLabel="DIC"
+                                    itemValue="12"
+                                    />
+                            </p:selectOneMenu>
+
+
+                            <p:commandButton 
+                                actionListener="#{reporteutilidadmensualMB.buttonAction}" 
+                                id="cbbuscar" 
+                                update="@form mfjgn1523ddkj" 
+                                value="Buscar"
+                                />
+                        </h:panelGrid>
+                    </p:panel>
+                </h:form>
+
+
+                <h:form id="mfjgn1523ddkj">
+                    <p:growl 
+                        id="msgs" 
+                        showDetail="false" 
+                        />  
+                    <p:panel 
+                        id="horizontal" 
+                        header="Lista de Utilidad Mensual" 
+                        toggleable="true" 
+                        toggleOrientation="horizontal"
+                        >
+
+                        <h:panelGrid 
+                            columns="12" 
+                            cellpadding="10"
+                            >
+                            <p:dataTable value="#{reporteutilidadmensualMB.listareporteutilidadmensual}" var="item">
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Anio"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.anio}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Mes"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.mes}"/>
+                                </p:column>
+
+
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="NombreOrg"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.nombreOrg}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Item"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.item}"/>
+                                </p:column>
+                                <p:column style="text-align:right">
+                                    <f:facet name="header">
+                                        <h:outputText value="TotalPorItem"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.totalPorItem}"/>
+                                </p:column>
+                                <p:column style="text-align:right">
+                                    <f:facet name="header">
+                                        <h:outputText value="PacientesAtendidos"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.pacientesAtendidos}"/>
+                                </p:column>
+                                <p:columnGroup type="footer">
+                                    <p:row>
+                                        <p:column colspan="4" style="text-align:right" footerText="Totals:" />
+                                        <p:column style="text-align:right" footerText="$#{reporteutilidadmensualMB.total}" />
+
+                                        <p:column footerText="" />
+                                    </p:row>
+                                </p:columnGroup>
+                            </p:dataTable>
+
+
+
+
+
+                        </h:panelGrid>
+                    </p:panel>
+                </h:form>
+
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>
